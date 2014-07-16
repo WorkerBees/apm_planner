@@ -47,7 +47,7 @@
 #include "qserialport.h"
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
-#include <private/qringbuffer_p.h>
+#include <5.3.1/QtSerialPort/private/qringbuffer_p.h>
 #else
 #include "qt4support/qringbuffer_p.h"
 #endif

@@ -719,24 +719,6 @@ void LinechartPlot::paintRealtime()
 
         windowLock.unlock();
 
-        // Defined both on windows 32- and 64 bit
-#if !(defined Q_OS_WIN)
-
-        //    const bool cacheMode =
-        //            canvas()->testPaintAttribute(QwtPlotCanvas::PaintCached);
-        const bool oldDirectPaint =
-            canvas()->testAttribute(Qt::WA_PaintOutsidePaintEvent);
-
-        const QPaintEngine *pe = canvas()->paintEngine();
-        bool directPaint = pe->hasFeature(QPaintEngine::PaintOutsidePaintEvent);
-        //if ( pe->type() == QPaintEngine::X11 ) {
-            // Even if not recommended by TrollTech, Qt::WA_PaintOutsidePaintEvent
-            // works on X11. This has an tremendous effect on the performance..
-            directPaint = true;
-        //}
-        canvas()->setAttribute(Qt::WA_PaintOutsidePaintEvent, directPaint);
-#endif
-
         // Only set current view as zoombase if zoomer is not active
         // else we could not zoom out any more
 
@@ -745,11 +727,6 @@ void LinechartPlot::paintRealtime()
         } else {
             replot();
         }
-
-#if !(defined Q_OS_WIN)
-        canvas()->setAttribute(Qt::WA_PaintOutsidePaintEvent, oldDirectPaint);
-#endif
-
 
         /*
         QMap<QString, QwtPlotCurve*>::iterator i;

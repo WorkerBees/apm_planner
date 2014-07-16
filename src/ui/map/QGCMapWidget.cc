@@ -7,6 +7,8 @@
 #include "Waypoint2DIcon.h"
 #include "UASWaypointManager.h"
 #include "ArduPilotMegaMAV.h"
+#include <QInputDialog>
+#include <QLineEdit>
 
 QGCMapWidget::QGCMapWidget(QWidget *parent) :
     mapcontrol::OPMapWidget(parent),
@@ -180,14 +182,14 @@ void QGCMapWidget::cameraActionTriggered()
 
 void QGCMapWidget::mousePressEvent(QMouseEvent *event)
 {
-    QLOG_DEBUG() << "mousePressEvent pos:" << event->pos() << " posF:" << event->posF();
+    QLOG_DEBUG() << "mousePressEvent pos:" << event->pos() << " posF:" << event->localPos();
     mousePressPos = event->pos();
     mapcontrol::OPMapWidget::mousePressEvent(event);
 }
 
 void QGCMapWidget::mouseReleaseEvent(QMouseEvent *event)
 {
-    QLOG_DEBUG() << "mouseReleaseEvent pos:" << event->pos() << " posF:" << event->posF();
+    QLOG_DEBUG() << "mouseReleaseEvent pos:" << event->pos() << " posF:" << event->localPos();
     mousePressPos = event->pos();
     mapcontrol::OPMapWidget::mouseReleaseEvent(event);
 }

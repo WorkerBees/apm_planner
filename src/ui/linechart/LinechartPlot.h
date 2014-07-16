@@ -224,6 +224,7 @@ public:
     static const int DEFAULT_PLOT_INTERVAL = 1000 * 8; ///< The default plot interval is 15 seconds
     static const int DEFAULT_SCALE_INTERVAL = 1000 * 8;
 
+    using LinechartPlot::setVisible;
 public slots:
     void setRefreshRate(int ms);
     /**

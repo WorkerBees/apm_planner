@@ -70,7 +70,7 @@ SerialConfigurationWindow::SerialConfigurationWindow(int linkid, QWidget *parent
 
         // Set up baud rates
         ui.baudRate->clear();
-		
+
 		// Keep track of all desired baud rates by OS. These are iterated through
 		// later and added to ui.baudRate.
 		QList<int> supportedBaudRates;
@@ -115,7 +115,7 @@ SerialConfigurationWindow::SerialConfigurationWindow(int linkid, QWidget *parent
 #endif
 
         //supportedBaudRates << 921600;
-		
+
 		// Now actually add all of our supported baud rates to the UI.
 		qSort(supportedBaudRates.begin(), supportedBaudRates.end());
 		for (int i = 0; i < supportedBaudRates.size(); ++i) {
@@ -257,7 +257,7 @@ void SerialConfigurationWindow::connectionStateChanged(bool connected)
 
 void SerialConfigurationWindow::setAdvancedSettings(bool visible)
 {
-    ui.advGroupBox->setShown(visible);
+    ui.advGroupBox->setVisible(visible);
 }
 
 SerialConfigurationWindow::~SerialConfigurationWindow()
@@ -433,6 +433,7 @@ void SerialConfigurationWindow::setLinkName(QString name)
 
 void SerialConfigurationWindow::setBaudRateString(QString baud)
 {
+    Q_UNUSED(baud)
     QString port = ui.portName->currentText();
 #ifdef Q_OS_WIN
     port = port.split("-").first();

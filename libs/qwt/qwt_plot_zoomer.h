@@ -83,6 +83,7 @@ public:
 
     virtual void setSelectionFlags(int);
 
+    using QwtPlotPicker::move;
 public slots:
     void moveBy(double x, double y);
     virtual void move(double x, double y);

@@ -1012,7 +1012,7 @@ void MainWindow::addToCentralStackedWidget(QWidget* widget, VIEW_SECTIONS viewSe
 void MainWindow::showCentralWidget()
 {
     QAction* act = qobject_cast<QAction *>(sender());
-    QWidget* widget = qVariantValue<QWidget *>(act->data());
+    QWidget* widget = act->data().value<QWidget *>();
     centerStack->setCurrentWidget(widget);
 }
 
@@ -1334,7 +1334,7 @@ void MainWindow::saveScreen()
 
     if (!screenFileName.isEmpty())
     {
-        window.save(screenFileName, format.toAscii());
+        window.save(screenFileName, format.toLatin1());
     }
 }
 void MainWindow::enableDockWidgetTitleBars(bool enabled)
@@ -1825,6 +1825,7 @@ void MainWindow::addLink(int linkid)
 
 void MainWindow::addLink(LinkInterface *link)
 {
+    Q_UNUSED(link)
     //This signal is fired when the connection manager adds a new link.
     //Need to create a comms configuration window.
 
@@ -1862,6 +1863,7 @@ void MainWindow::addLink(LinkInterface *link)
 }
 void MainWindow::linkError(int linkid,QString errorstring)
 {
+    Q_UNUSED(linkid)
     QMessageBox::information(this,"Link Error",errorstring);
 }
 

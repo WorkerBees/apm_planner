@@ -99,6 +99,7 @@ class OSGUTIL_EXPORT GLObjectsVisitor : public osg::NodeVisitor
           */
         virtual void apply(osg::Geode& node);
 
+        using osg::NodeVisitor::apply;
         void apply(osg::Drawable& drawable);
         void apply(osg::StateSet& stateset);
 

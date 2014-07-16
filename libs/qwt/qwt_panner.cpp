@@ -372,7 +372,7 @@ bool QwtPanner::eventFilter(QObject *o, QEvent *e)
 */
 void QwtPanner::widgetMousePressEvent(QMouseEvent *me)
 {
-    if ( me->button() != d_data->button )
+    if ( me->button() != (Qt::MouseButton)d_data->button )
         return;
 
     QWidget *w = parentWidget();
@@ -384,7 +384,7 @@ void QwtPanner::widgetMousePressEvent(QMouseEvent *me)
             (d_data->buttonState & Qt::KeyButtonMask) )
 #else
     if ( (me->modifiers() & Qt::KeyboardModifierMask) !=
-            (int)(d_data->buttonState & Qt::KeyboardModifierMask) )
+            (d_data->buttonState & Qt::KeyboardModifierMask) )
 #endif
     {
         return;
@@ -489,7 +489,7 @@ void QwtPanner::widgetKeyPressEvent(QKeyEvent *ke)
             (d_data->abortKeyState & Qt::KeyButtonMask);
 #else
             (ke->modifiers() & Qt::KeyboardModifierMask) ==
-            (int)(d_data->abortKeyState & Qt::KeyboardModifierMask);
+            (d_data->abortKeyState & Qt::KeyboardModifierMask);
 #endif
         if ( matched ) {
             hide();

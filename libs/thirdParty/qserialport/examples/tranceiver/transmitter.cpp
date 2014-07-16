@@ -165,7 +165,7 @@ void Transmitter::timerEvent(QTimerEvent *event)
         case 2: msg = "SIG_DCD_RQ"; break;
         case 3: msg = "SIG_RI__RQ"; break;
       }
-      socket_->writeDatagram(msg.toAscii(), QHostAddress(udpIp_), udpPortNo_);
+      socket_->writeDatagram(msg.toLatin1(), QHostAddress(udpIp_), udpPortNo_);
     }
   }
 }
