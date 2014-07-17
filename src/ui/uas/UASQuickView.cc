@@ -8,7 +8,7 @@
 UASQuickView::UASQuickView(QWidget *parent) : QWidget(parent)
 {
     quickViewSelectDialog=0;
-    m_columnCount=2;
+    m_columnCount=1;
     m_currentColumn=0;
     ui.setupUi(this);
 
@@ -29,21 +29,13 @@ UASQuickView::UASQuickView(QWidget *parent) : QWidget(parent)
     loadSettings();
 
     //If we don't have any predefined settings, set some defaults.
-    m_columnCount = 2;
+    m_columnCount = 1;
     if (uasPropertyValueMap.size() == 0)
     {
-        valueEnabled("GCS Status.Altitude (GPS) (m)");
-        valueEnabled("GCS Status.Altitude (REL) (m)");
-        valueEnabled("GCS Status.Roll (deg)");
-        valueEnabled("GCS Status.Pitch (deg)");
-        valueEnabled("GCS Status.Yaw (deg)");
-        valueEnabled("GCS Status.Climb (m/s)");
+        valueEnabled("GCS Status.CPU Load (%)");
         valueEnabled("GCS Status.Voltage (V)");
-        valueEnabled("GCS Status.Current (A)");
         valueEnabled("GCS Status.Battery (%)");
-        valueEnabled("GCS Status.GPS Fix ()");
-        valueEnabled("GCS Status.GPS Sats ()");
-        valueEnabled("GCS Status.GPS HDOP (m)");
+        valueEnabled("GCS Status.Batt Time Remaining (s)");
     }
 
     QAction *action = new QAction("Add/Remove Items",this);
