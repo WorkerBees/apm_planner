@@ -26,6 +26,10 @@ http://www.fsf.org/licensing/licenses
 #pragma warning(disable:4702)
 #pragma warning(disable:4996)
 #endif
+
+#define MON_Internal_UnusedStringify(macro_arg_string_literal) #macro_arg_string_literal
+#define Q_UNUSED(macro_arg_parameter) _Pragma(MON_Internal_UnusedStringify(unused(macro_arg_parameter)))
+
 using namespace std;
 
 /////////////////////////////////////////////////////////////////////////
@@ -282,7 +286,7 @@ SEE ALSO
 *************************************************************************/
 void odesolverrkck(const real_1d_array &y, const real_1d_array &x, const double eps, const double h, odesolverstate &state)
 {
-    alglib_impl::ae_state _alglib_env_state;    
+    alglib_impl::ae_state _alglib_env_state;
     ae_int_t n;
     ae_int_t m;
 
@@ -510,7 +514,7 @@ ae_bool odesolveriteration(odesolverstate* state, ae_state *_state)
     ae_bool result;
 
 
-    
+
     /*
      * Reverse communication preparations
      * I know it looks ugly, but it works the same way
@@ -557,11 +561,11 @@ ae_bool odesolveriteration(odesolverstate* state, ae_state *_state)
     {
         goto lbl_0;
     }
-    
+
     /*
      * Routine body
      */
-    
+
     /*
      * prepare
      */
@@ -575,14 +579,14 @@ ae_bool odesolveriteration(odesolverstate* state, ae_state *_state)
     h = state->h;
     maxgrowpow = ae_pow(odesolver_odesolvermaxgrow, 5, _state);
     state->repnfev = 0;
-    
+
     /*
      * some preliminary checks for internal errors
      * after this we assume that H>0 and M>1
      */
     ae_assert(ae_fp_greater(state->h,0), "ODESolver: internal error", _state);
     ae_assert(m>1, "ODESolverIteration: internal error", _state);
-    
+
     /*
      * choose solver
      */
@@ -590,7 +594,7 @@ ae_bool odesolveriteration(odesolverstate* state, ae_state *_state)
     {
         goto lbl_1;
     }
-    
+
     /*
      * Cask-Karp solver
      * Prepare coefficients table.
@@ -634,7 +638,7 @@ ae_bool odesolveriteration(odesolverstate* state, ae_state *_state)
     state->rkcs.ptr.p_double[4] = (double)277/(double)14336;
     state->rkcs.ptr.p_double[5] = (double)1/(double)4;
     ae_matrix_set_length(&state->rkk, 6, n, _state);
-    
+
     /*
      * Main cycle consists of two iterations:
      * * outer where we travel from X[i-1] to X[i]
@@ -656,7 +660,7 @@ lbl_3:
     {
         goto lbl_5;
     }
-    
+
     /*
      * begin inner iteration
      */
@@ -665,7 +669,7 @@ lbl_6:
     {
         goto lbl_7;
     }
-    
+
     /*
      * truncate step if needed (beyond right boundary).
      * determine should we store X or not
@@ -679,7 +683,7 @@ lbl_6:
     {
         gridpoint = ae_false;
     }
-    
+
     /*
      * Update error scale maximums
      *
@@ -690,7 +694,7 @@ lbl_6:
     {
         state->escale.ptr.p_double[j] = ae_maxreal(state->escale.ptr.p_double[j], ae_fabs(state->yc.ptr.p_double[j], _state), _state);
     }
-    
+
     /*
      * make one step:
      * 1. calculate all info needed to do step
@@ -710,7 +714,7 @@ lbl_8:
     {
         goto lbl_10;
     }
-    
+
     /*
      * prepare data for the next update of YN/YNS
      */
@@ -729,7 +733,7 @@ lbl_0:
     state->repnfev = state->repnfev+1;
     v = h*state->xscale;
     ae_v_moved(&state->rkk.ptr.pp_double[k][0], 1, &state->dy.ptr.p_double[0], 1, ae_v_len(0,n-1), v);
-    
+
     /*
      * update YN/YNS
      */
@@ -740,7 +744,7 @@ lbl_0:
     k = k+1;
     goto lbl_8;
 lbl_10:
-    
+
     /*
      * estimate error
      */
@@ -749,7 +753,7 @@ lbl_10:
     {
         if( !state->fraceps )
         {
-            
+
             /*
              * absolute error is estimated
              */
@@ -757,7 +761,7 @@ lbl_10:
         }
         else
         {
-            
+
             /*
              * Relative error is estimated
              */
@@ -769,7 +773,7 @@ lbl_10:
             err = ae_maxreal(err, ae_fabs(state->yn.ptr.p_double[j]-state->yns.ptr.p_double[j], _state)/v, _state);
         }
     }
-    
+
     /*
      * calculate new step, restart if necessary
      */
@@ -790,18 +794,18 @@ lbl_10:
         h = h2;
         goto lbl_6;
     }
-    
+
     /*
      * advance position
      */
     xc = xc+h;
     ae_v_move(&state->yc.ptr.p_double[0], 1, &state->yn.ptr.p_double[0], 1, ae_v_len(0,n-1));
-    
+
     /*
      * update H
      */
     h = h2;
-    
+
     /*
      * break on grid point
      */
@@ -811,7 +815,7 @@ lbl_10:
     }
     goto lbl_6;
 lbl_7:
-    
+
     /*
      * save result
      */
@@ -825,7 +829,7 @@ lbl_5:
 lbl_1:
     result = ae_false;
     return result;
-    
+
     /*
      * Saving state
      */
@@ -925,7 +929,7 @@ static void odesolver_odesolverinit(ae_int_t solvertype,
 
     _odesolverstate_clear(state);
 
-    
+
     /*
      * Prepare RComm
      */
@@ -934,7 +938,7 @@ static void odesolver_odesolverinit(ae_int_t solvertype,
     ae_vector_set_length(&state->rstate.ra, 5+1, _state);
     state->rstate.stage = -1;
     state->needdy = ae_false;
-    
+
     /*
      * check parameters.
      */
@@ -947,7 +951,7 @@ static void odesolver_odesolverinit(ae_int_t solvertype,
     {
         h = -h;
     }
-    
+
     /*
      * quick exit if necessary.
      * after this block we assume that M>1
@@ -962,7 +966,7 @@ static void odesolver_odesolverinit(ae_int_t solvertype,
         ae_v_move(&state->xg.ptr.p_double[0], 1, &x->ptr.p_double[0], 1, ae_v_len(0,m-1));
         return;
     }
-    
+
     /*
      * check again: correct order of X[]
      */
@@ -979,7 +983,7 @@ static void odesolver_odesolverinit(ae_int_t solvertype,
             return;
         }
     }
-    
+
     /*
      * auto-select H if necessary
      */
@@ -992,7 +996,7 @@ static void odesolver_odesolverinit(ae_int_t solvertype,
         }
         h = 0.001*v;
     }
-    
+
     /*
      * store parameters
      */
@@ -1016,7 +1020,7 @@ static void odesolver_odesolverinit(ae_int_t solvertype,
     ae_v_move(&state->yc.ptr.p_double[0], 1, &y->ptr.p_double[0], 1, ae_v_len(0,n-1));
     state->solvertype = solvertype;
     state->repterminationtype = 0;
-    
+
     /*
      * Allocate arrays
      */
@@ -1152,6 +1156,8 @@ void _odesolverstate_destroy(void* _p)
 
 ae_bool _odesolverreport_init(void* _p, ae_state *_state, ae_bool make_automatic)
 {
+    Q_UNUSED(_state)
+    Q_UNUSED(make_automatic)
     odesolverreport *p = (odesolverreport*)_p;
     ae_touch_ptr((void*)p);
     return ae_true;
@@ -1160,6 +1166,8 @@ ae_bool _odesolverreport_init(void* _p, ae_state *_state, ae_bool make_automatic
 
 ae_bool _odesolverreport_init_copy(void* _dst, void* _src, ae_state *_state, ae_bool make_automatic)
 {
+    Q_UNUSED(_state)
+    Q_UNUSED(make_automatic)
     odesolverreport *dst = (odesolverreport*)_dst;
     odesolverreport *src = (odesolverreport*)_src;
     dst->nfev = src->nfev;

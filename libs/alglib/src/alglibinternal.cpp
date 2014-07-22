@@ -348,15 +348,6 @@ static void ftbase_ffticltrec(/* Real    */ ae_vector* a,
      ae_int_t m,
      ae_int_t n,
      ae_state *_state);
-static void ftbase_fftirltrec(/* Real    */ ae_vector* a,
-     ae_int_t astart,
-     ae_int_t astride,
-     /* Real    */ ae_vector* b,
-     ae_int_t bstart,
-     ae_int_t bstride,
-     ae_int_t m,
-     ae_int_t n,
-     ae_state *_state);
 static void ftbase_ftbasefindsmoothrec(ae_int_t n,
      ae_int_t seed,
      ae_int_t leastfactor,
@@ -2991,6 +2982,7 @@ void tagsortmiddleir(/* Integer */ ae_vector* a,
      ae_int_t n,
      ae_state *_state)
 {
+    Q_UNUSED(_state);
     ae_int_t i;
     ae_int_t k;
     ae_int_t t;
@@ -3105,6 +3097,7 @@ void tagheappushi(/* Real    */ ae_vector* a,
      ae_int_t vb,
      ae_state *_state)
 {
+    Q_UNUSED(_state);
     ae_int_t j;
     ae_int_t k;
     double v;
@@ -3186,6 +3179,7 @@ void tagheapreplacetopi(/* Real    */ ae_vector* a,
      ae_int_t vb,
      ae_state *_state)
 {
+    Q_UNUSED(_state);
     ae_int_t j;
     ae_int_t k1;
     ae_int_t k2;
@@ -3353,6 +3347,7 @@ ae_int_t lowerbound(/* Real    */ ae_vector* a,
      double t,
      ae_state *_state)
 {
+    Q_UNUSED(_state);
     ae_int_t l;
     ae_int_t half;
     ae_int_t first;
@@ -3398,6 +3393,7 @@ ae_int_t upperbound(/* Real    */ ae_vector* a,
      double t,
      ae_state *_state)
 {
+    Q_UNUSED(_state);
     ae_int_t l;
     ae_int_t half;
     ae_int_t first;
@@ -4105,6 +4101,7 @@ ae_bool cmatrixrank1f(ae_int_t m,
      ae_int_t iv,
      ae_state *_state)
 {
+    Q_UNUSED(_state);
 #ifndef ALGLIB_INTERCEPTS_ABLAS
     ae_bool result;
 
@@ -4135,6 +4132,7 @@ ae_bool rmatrixrank1f(ae_int_t m,
      ae_int_t iv,
      ae_state *_state)
 {
+    Q_UNUSED(_state);
 #ifndef ALGLIB_INTERCEPTS_ABLAS
     ae_bool result;
 
@@ -4166,6 +4164,17 @@ ae_bool cmatrixmvf(ae_int_t m,
      ae_int_t iy,
      ae_state *_state)
 {
+    Q_UNUSED(m)
+    Q_UNUSED(n)
+    Q_UNUSED(a)
+    Q_UNUSED(ia)
+    Q_UNUSED(ja)
+    Q_UNUSED(opa)
+    Q_UNUSED(x)
+    Q_UNUSED(ix)
+    Q_UNUSED(y)
+    Q_UNUSED(iy)
+    Q_UNUSED(_state)
     ae_bool result;
 
 
@@ -4193,6 +4202,17 @@ ae_bool rmatrixmvf(ae_int_t m,
      ae_int_t iy,
      ae_state *_state)
 {
+    Q_UNUSED(m)
+    Q_UNUSED(n)
+    Q_UNUSED(a)
+    Q_UNUSED(ia)
+    Q_UNUSED(ja)
+    Q_UNUSED(opa)
+    Q_UNUSED(x)
+    Q_UNUSED(ix)
+    Q_UNUSED(y)
+    Q_UNUSED(iy)
+    Q_UNUSED(_state)
     ae_bool result;
 
 
@@ -4221,7 +4241,19 @@ ae_bool cmatrixrighttrsmf(ae_int_t m,
      ae_int_t j2,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
 #ifndef ALGLIB_INTERCEPTS_ABLAS
+    Q_UNUSED(m)
+    Q_UNUSED(n)
+    Q_UNUSED(a)
+    Q_UNUSED(i1)
+    Q_UNUSED(j1)
+    Q_UNUSED(isupper)
+    Q_UNUSED(isunit)
+    Q_UNUSED(optype)
+    Q_UNUSED(x)
+    Q_UNUSED(i2)
+    Q_UNUSED(j2)
     ae_bool result;
 
 
@@ -4253,7 +4285,19 @@ ae_bool cmatrixlefttrsmf(ae_int_t m,
      ae_int_t j2,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
 #ifndef ALGLIB_INTERCEPTS_ABLAS
+    Q_UNUSED(m)
+    Q_UNUSED(n)
+    Q_UNUSED(a)
+    Q_UNUSED(i1)
+    Q_UNUSED(j1)
+    Q_UNUSED(isupper)
+    Q_UNUSED(isunit)
+    Q_UNUSED(optype)
+    Q_UNUSED(x)
+    Q_UNUSED(i2)
+    Q_UNUSED(j2)
     ae_bool result;
 
 
@@ -4285,7 +4329,19 @@ ae_bool rmatrixrighttrsmf(ae_int_t m,
      ae_int_t j2,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
 #ifndef ALGLIB_INTERCEPTS_ABLAS
+    Q_UNUSED(m)
+    Q_UNUSED(n)
+    Q_UNUSED(a)
+    Q_UNUSED(i1)
+    Q_UNUSED(j1)
+    Q_UNUSED(isupper)
+    Q_UNUSED(isunit)
+    Q_UNUSED(optype)
+    Q_UNUSED(x)
+    Q_UNUSED(i2)
+    Q_UNUSED(j2)
     ae_bool result;
 
 
@@ -4317,7 +4373,19 @@ ae_bool rmatrixlefttrsmf(ae_int_t m,
      ae_int_t j2,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
 #ifndef ALGLIB_INTERCEPTS_ABLAS
+    Q_UNUSED(m)
+    Q_UNUSED(n)
+    Q_UNUSED(a)
+    Q_UNUSED(i1)
+    Q_UNUSED(j1)
+    Q_UNUSED(isupper)
+    Q_UNUSED(isunit)
+    Q_UNUSED(optype)
+    Q_UNUSED(x)
+    Q_UNUSED(i2)
+    Q_UNUSED(j2)
     ae_bool result;
 
 
@@ -4350,7 +4418,19 @@ ae_bool cmatrixsyrkf(ae_int_t n,
      ae_bool isupper,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
 #ifndef ALGLIB_INTERCEPTS_ABLAS
+    Q_UNUSED(n)
+    Q_UNUSED(k)
+    Q_UNUSED(a)
+    Q_UNUSED(ia)
+    Q_UNUSED(ja)
+    Q_UNUSED(optypea)
+    Q_UNUSED(beta)
+    Q_UNUSED(c)
+    Q_UNUSED(ic)
+    Q_UNUSED(jc)
+    Q_UNUSED(isupper)
     ae_bool result;
 
 
@@ -4383,7 +4463,19 @@ ae_bool rmatrixsyrkf(ae_int_t n,
      ae_bool isupper,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
 #ifndef ALGLIB_INTERCEPTS_ABLAS
+    Q_UNUSED(n)
+    Q_UNUSED(k)
+    Q_UNUSED(a)
+    Q_UNUSED(ia)
+    Q_UNUSED(ja)
+    Q_UNUSED(optypea)
+    Q_UNUSED(beta)
+    Q_UNUSED(c)
+    Q_UNUSED(ic)
+    Q_UNUSED(jc)
+    Q_UNUSED(isupper)
     ae_bool result;
 
 
@@ -4420,7 +4512,24 @@ ae_bool rmatrixgemmf(ae_int_t m,
      ae_int_t jc,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
 #ifndef ALGLIB_INTERCEPTS_ABLAS
+    Q_UNUSED(m)
+    Q_UNUSED(n)
+    Q_UNUSED(k)
+    Q_UNUSED(alpha)
+    Q_UNUSED(a)
+    Q_UNUSED(ia)
+    Q_UNUSED(ja)
+    Q_UNUSED(optypea)
+    Q_UNUSED(b)
+    Q_UNUSED(ib)
+    Q_UNUSED(jb)
+    Q_UNUSED(optypeb)
+    Q_UNUSED(beta)
+    Q_UNUSED(c)
+    Q_UNUSED(ic)
+    Q_UNUSED(jc)
     ae_bool result;
 
 
@@ -4457,7 +4566,24 @@ ae_bool cmatrixgemmf(ae_int_t m,
      ae_int_t jc,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
 #ifndef ALGLIB_INTERCEPTS_ABLAS
+    Q_UNUSED(m)
+    Q_UNUSED(n)
+    Q_UNUSED(k)
+    Q_UNUSED(alpha)
+    Q_UNUSED(a)
+    Q_UNUSED(ia)
+    Q_UNUSED(ja)
+    Q_UNUSED(optypea)
+    Q_UNUSED(b)
+    Q_UNUSED(ib)
+    Q_UNUSED(jb)
+    Q_UNUSED(optypeb)
+    Q_UNUSED(beta)
+    Q_UNUSED(c)
+    Q_UNUSED(ic)
+    Q_UNUSED(jc)
     ae_bool result;
 
 
@@ -6060,14 +6186,27 @@ ae_bool rmatrixsyrkmkl(ae_int_t n,
      ae_bool isupper,
      ae_state *_state)
 {
-#ifndef ALGLIB_INTERCEPTS_MKL
+    Q_UNUSED(_state)
+#ifndef ALGLIB_INTERCEPTS_ABLAS
+    Q_UNUSED(n)
+    Q_UNUSED(k)
+    Q_UNUSED(alpha)
+    Q_UNUSED(a)
+    Q_UNUSED(ia)
+    Q_UNUSED(ja)
+    Q_UNUSED(optypea)
+    Q_UNUSED(beta)
+    Q_UNUSED(c)
+    Q_UNUSED(ic)
+    Q_UNUSED(jc)
+    Q_UNUSED(isupper)
     ae_bool result;
 
 
     result = ae_false;
     return result;
 #else
-    return _ialglib_i_rmatrixsyrkmkl(n, k, alpha, a, ia, ja, optypea, beta, c, ic, jc, isupper);
+    return _ialglib_i_rmatrixsyrkf(n, k, alpha, a, ia, ja, optypea, beta, c, ic, jc, isupper);
 #endif
 }
 
@@ -6097,14 +6236,31 @@ ae_bool rmatrixgemmmkl(ae_int_t m,
      ae_int_t jc,
      ae_state *_state)
 {
-#ifndef ALGLIB_INTERCEPTS_MKL
+    Q_UNUSED(_state)
+#ifndef ALGLIB_INTERCEPTS_ABLAS
+    Q_UNUSED(m)
+    Q_UNUSED(n)
+    Q_UNUSED(k)
+    Q_UNUSED(alpha)
+    Q_UNUSED(a)
+    Q_UNUSED(ia)
+    Q_UNUSED(ja)
+    Q_UNUSED(optypea)
+    Q_UNUSED(b)
+    Q_UNUSED(ib)
+    Q_UNUSED(jb)
+    Q_UNUSED(optypeb)
+    Q_UNUSED(beta)
+    Q_UNUSED(c)
+    Q_UNUSED(ic)
+    Q_UNUSED(jc)
     ae_bool result;
 
 
     result = ae_false;
     return result;
 #else
-    return _ialglib_i_rmatrixgemmmkl(m, n, k, alpha, a, ia, ja, optypea, b, ib, jb, optypeb, beta, c, ic, jc);
+    return _ialglib_i_rmatrixgemmf(m, n, k, alpha, a, ia, ja, optypea, b, ib, jb, optypeb, beta, c, ic, jc);
 #endif
 }
 
@@ -6685,6 +6841,7 @@ void hermitianmatrixvectormultiply(/* Complex */ ae_matrix* a,
      /* Complex */ ae_vector* y,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
     ae_int_t i;
     ae_int_t ba1;
     ae_int_t by1;
@@ -6991,6 +7148,7 @@ void applyreflectionfromtheleft(/* Real    */ ae_matrix* c,
      /* Real    */ ae_vector* work,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
     double t;
     ae_int_t i;
 
@@ -7062,6 +7220,7 @@ void applyreflectionfromtheright(/* Real    */ ae_matrix* c,
      /* Real    */ ae_vector* work,
      ae_state *_state)
 {
+    Q_UNUSED(work)
     double t;
     ae_int_t i;
     ae_int_t vm;
@@ -7338,6 +7497,7 @@ void complexapplyreflectionfromtheright(/* Complex */ ae_matrix* c,
      /* Complex */ ae_vector* work,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
     ae_complex t;
     ae_int_t i;
     ae_int_t vm;
@@ -7484,6 +7644,7 @@ void symmetricrank2update(/* Real    */ ae_matrix* a,
      double alpha,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
     ae_int_t i;
     ae_int_t tp1;
     ae_int_t tp2;
@@ -7559,6 +7720,7 @@ void applyrotationsfromtheleft(ae_bool isforward,
      /* Real    */ ae_vector* work,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
     ae_int_t j;
     ae_int_t jp1;
     double ctemp;
@@ -7697,6 +7859,7 @@ void applyrotationsfromtheright(ae_bool isforward,
      /* Real    */ ae_vector* work,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
     ae_int_t j;
     ae_int_t jp1;
     double ctemp;
@@ -9113,6 +9276,7 @@ static double hsschur_extschursign(double a, double b, ae_state *_state)
 
 static ae_int_t hsschur_extschursigntoone(double b, ae_state *_state)
 {
+    Q_UNUSED(_state)
     ae_int_t result;
 
 
@@ -10873,6 +11037,18 @@ ae_bool hpcchunkedgradient(/* Real    */ ae_vector* weights,
      ae_state *_state)
 {
 #ifndef ALGLIB_INTERCEPTS_SSE2
+    Q_UNUSED(weights)
+    Q_UNUSED(structinfo)
+    Q_UNUSED(columnmeans)
+    Q_UNUSED(columnsigmas)
+    Q_UNUSED(xy)
+    Q_UNUSED(cstart)
+    Q_UNUSED(csize)
+    Q_UNUSED(batch4buf)
+    Q_UNUSED(hpcbuf)
+    Q_UNUSED(e)
+    Q_UNUSED(naturalerrorfunc)
+    Q_UNUSED(_state)
     ae_bool result;
 
 
@@ -10900,6 +11076,16 @@ ae_bool hpcchunkedprocess(/* Real    */ ae_vector* weights,
      ae_state *_state)
 {
 #ifndef ALGLIB_INTERCEPTS_SSE2
+    Q_UNUSED(weights)
+    Q_UNUSED(structinfo)
+    Q_UNUSED(columnmeans)
+    Q_UNUSED(columnsigmas)
+    Q_UNUSED(xy)
+    Q_UNUSED(cstart)
+    Q_UNUSED(csize)
+    Q_UNUSED(batch4buf)
+    Q_UNUSED(hpcbuf)
+    Q_UNUSED(_state)
     ae_bool result;
 
 
@@ -10924,6 +11110,10 @@ static ae_bool hpccores_hpcpreparechunkedgradientx(/* Real    */ ae_vector* weig
      ae_state *_state)
 {
 #ifndef ALGLIB_INTERCEPTS_SSE2
+    Q_UNUSED(weights)
+    Q_UNUSED(wcount)
+    Q_UNUSED(hpcbuf)
+    Q_UNUSED(_state)
     ae_bool result;
 
 
@@ -10948,6 +11138,10 @@ static ae_bool hpccores_hpcfinalizechunkedgradientx(/* Real    */ ae_vector* buf
      ae_state *_state)
 {
 #ifndef ALGLIB_INTERCEPTS_SSE2
+    Q_UNUSED(buf)
+    Q_UNUSED(wcount)
+    Q_UNUSED(grad)
+    Q_UNUSED(_state)
     ae_bool result;
 
 
@@ -11926,6 +12120,7 @@ This is rcomm-based search function
 *************************************************************************/
 ae_bool armijoiteration(armijostate* state, ae_state *_state)
 {
+    Q_UNUSED(_state)
     double v;
     ae_int_t n;
     ae_bool result;
@@ -12183,7 +12378,7 @@ void armijoresults(armijostate* state,
      double* f,
      ae_state *_state)
 {
-
+    Q_UNUSED(_state)
 
     *info = state->info;
     *stp = state->stplen;
@@ -12206,6 +12401,7 @@ static void linmin_mcstep(double* stx,
      ae_int_t* info,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
     ae_bool bound;
     double gamma;
     double p;
@@ -12711,6 +12907,7 @@ void findprimitiverootandinverse(ae_int_t n,
 
 static ae_bool ntheory_isprime(ae_int_t n, ae_state *_state)
 {
+    Q_UNUSED(_state)
     ae_int_t p;
     ae_bool result;
 
@@ -13008,6 +13205,8 @@ void ftbasefactorize(ae_int_t n,
      ae_int_t* n2,
      ae_state *_state)
 {
+    Q_UNUSED(tasktype)
+    Q_UNUSED(_state)
     ae_int_t j;
 
     *n1 = 0;
@@ -13076,6 +13275,7 @@ Is number smooth?
 *************************************************************************/
 ae_bool ftbaseissmooth(ae_int_t n, ae_state *_state)
 {
+    Q_UNUSED(_state)
     ae_int_t i;
     ae_bool result;
 
@@ -14965,6 +15165,8 @@ static void ftbase_ftbluesteinsfft(fasttransformplan* plan,
      /* Real    */ ae_vector* bufd,
      ae_state *_state)
 {
+    Q_UNUSED(bufb)
+    Q_UNUSED(bufd)
     ae_int_t op;
     ae_int_t i;
     double x;
@@ -15081,6 +15283,7 @@ static void ftbase_ftprecomputeradersfft(ae_int_t n,
      ae_int_t offs,
      ae_state *_state)
 {
+    Q_UNUSED(rq)
     ae_frame _frame_block;
     ae_int_t q;
     fasttransformplan plan;
@@ -15278,6 +15481,7 @@ static void ftbase_ftfactorize(ae_int_t n,
      ae_int_t* n2,
      ae_state *_state)
 {
+    Q_UNUSED(isroot)
     ae_int_t j;
     ae_int_t k;
 
@@ -15681,88 +15885,6 @@ static void ftbase_ffticltrec(/* Real    */ ae_vector* a,
     }
 }
 
-
-/*************************************************************************
-Recurrent subroutine for a InternalRealLinTranspose
-
-
-  -- ALGLIB --
-     Copyright 01.05.2009 by Bochkanov Sergey
-*************************************************************************/
-static void ftbase_fftirltrec(/* Real    */ ae_vector* a,
-     ae_int_t astart,
-     ae_int_t astride,
-     /* Real    */ ae_vector* b,
-     ae_int_t bstart,
-     ae_int_t bstride,
-     ae_int_t m,
-     ae_int_t n,
-     ae_state *_state)
-{
-    ae_int_t i;
-    ae_int_t j;
-    ae_int_t idx1;
-    ae_int_t idx2;
-    ae_int_t m1;
-    ae_int_t n1;
-
-
-    if( m==0||n==0 )
-    {
-        return;
-    }
-    if( ae_maxint(m, n, _state)<=8 )
-    {
-        for(i=0; i<=m-1; i++)
-        {
-            idx1 = bstart+i;
-            idx2 = astart+i*astride;
-            for(j=0; j<=n-1; j++)
-            {
-                b->ptr.p_double[idx1] = a->ptr.p_double[idx2];
-                idx1 = idx1+bstride;
-                idx2 = idx2+1;
-            }
-        }
-        return;
-    }
-    if( n>m )
-    {
-
-        /*
-         * New partition:
-         *
-         * "A^T -> B" becomes "(A1 A2)^T -> ( B1 )
-         *                                  ( B2 )
-         */
-        n1 = n/2;
-        if( n-n1>=8&&n1%8!=0 )
-        {
-            n1 = n1+(8-n1%8);
-        }
-        ae_assert(n-n1>0, "Assertion failed", _state);
-        ftbase_fftirltrec(a, astart, astride, b, bstart, bstride, m, n1, _state);
-        ftbase_fftirltrec(a, astart+n1, astride, b, bstart+n1*bstride, bstride, m, n-n1, _state);
-    }
-    else
-    {
-
-        /*
-         * New partition:
-         *
-         * "A^T -> B" becomes "( A1 )^T -> ( B1 B2 )
-         *                     ( A2 )
-         */
-        m1 = m/2;
-        if( m-m1>=8&&m1%8!=0 )
-        {
-            m1 = m1+(8-m1%8);
-        }
-        ae_assert(m-m1>0, "Assertion failed", _state);
-        ftbase_fftirltrec(a, astart, astride, b, bstart, bstride, m1, n, _state);
-        ftbase_fftirltrec(a, astart+m1*astride, astride, b, bstart+m1, bstride, m-m1, n, _state);
-    }
-}
 
 
 /*************************************************************************

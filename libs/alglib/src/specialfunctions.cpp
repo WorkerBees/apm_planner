@@ -26,6 +26,10 @@ http://www.fsf.org/licensing/licenses
 #pragma warning(disable:4702)
 #pragma warning(disable:4996)
 #endif
+
+#define MON_Internal_UnusedStringify(macro_arg_string_literal) #macro_arg_string_literal
+#define Q_UNUSED(macro_arg_parameter) _Pragma(MON_Internal_UnusedStringify(unused(macro_arg_parameter)))
+
 using namespace std;
 
 /////////////////////////////////////////////////////////////////////////
@@ -5238,6 +5242,7 @@ static void bessel_besselmfirstcheb(double c,
      double* b2,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
 
 
     *b0 = c;
@@ -5259,6 +5264,7 @@ static void bessel_besselmnextcheb(double x,
      double* b2,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
 
 
     *b2 = *b1;
@@ -5279,6 +5285,7 @@ static void bessel_besselm1firstcheb(double c,
      double* b2,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
 
 
     *b0 = c;
@@ -5300,6 +5307,7 @@ static void bessel_besselm1nextcheb(double x,
      double* b2,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
 
 
     *b2 = *b1;
@@ -5313,6 +5321,7 @@ static void bessel_besselasympt0(double x,
      double* qzero,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
     double xsq;
     double p2;
     double q2;
@@ -5361,6 +5370,7 @@ static void bessel_besselasympt1(double x,
      double* qzero,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
     double xsq;
     double p2;
     double q2;
@@ -5699,7 +5709,7 @@ double invincompletebeta(double a, double b, double y, ae_state *_state)
 
     i = 0;
     ae_assert(ae_fp_greater_eq(y,0)&&ae_fp_less_eq(y,1), "Domain error in InvIncompleteBeta", _state);
-    
+
     /*
      * special cases
      */
@@ -5713,7 +5723,7 @@ double invincompletebeta(double a, double b, double y, ae_state *_state)
         result = 1;
         return result;
     }
-    
+
     /*
      * these initializations are not really necessary,
      * but without them compiler complains about 'possibly uninitialized variables'.
@@ -5728,7 +5738,7 @@ double invincompletebeta(double a, double b, double y, ae_state *_state)
     lgm = 0;
     dir = 0;
     di = 0;
-    
+
     /*
      * normal initializations
      */
@@ -5744,13 +5754,13 @@ double invincompletebeta(double a, double b, double y, ae_state *_state)
     newtcycle = 4;
     breaknewtcycle = 5;
     breakihalvecycle = 6;
-    
+
     /*
      * main loop
      */
     for(;;)
     {
-        
+
         /*
          * start
          */
@@ -5808,7 +5818,7 @@ double invincompletebeta(double a, double b, double y, ae_state *_state)
             mainlooppos = ihalve;
             continue;
         }
-        
+
         /*
          * ihalve
          */
@@ -5820,7 +5830,7 @@ double invincompletebeta(double a, double b, double y, ae_state *_state)
             mainlooppos = ihalvecycle;
             continue;
         }
-        
+
         /*
          * ihalvecycle
          */
@@ -5956,7 +5966,7 @@ double invincompletebeta(double a, double b, double y, ae_state *_state)
                 continue;
             }
         }
-        
+
         /*
          * breakihalvecycle
          */
@@ -5975,7 +5985,7 @@ double invincompletebeta(double a, double b, double y, ae_state *_state)
             mainlooppos = newt;
             continue;
         }
-        
+
         /*
          * newt
          */
@@ -5991,7 +6001,7 @@ double invincompletebeta(double a, double b, double y, ae_state *_state)
             mainlooppos = newtcycle;
             continue;
         }
-        
+
         /*
          * newtcycle
          */
@@ -6082,7 +6092,7 @@ double invincompletebeta(double a, double b, double y, ae_state *_state)
                 continue;
             }
         }
-        
+
         /*
          * breaknewtcycle
          */
@@ -6093,7 +6103,7 @@ double invincompletebeta(double a, double b, double y, ae_state *_state)
             continue;
         }
     }
-    
+
     /*
      * done
      */
@@ -6648,6 +6658,7 @@ double chebyshevcalculate(ae_int_t r,
      double x,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
     ae_int_t i;
     double a;
     double b;
@@ -6655,7 +6666,7 @@ double chebyshevcalculate(ae_int_t r,
 
 
     result = 0;
-    
+
     /*
      * Prepare A and B
      */
@@ -6669,7 +6680,7 @@ double chebyshevcalculate(ae_int_t r,
         a = 1;
         b = 2*x;
     }
-    
+
     /*
      * Special cases: N=0 or N=1
      */
@@ -6683,7 +6694,7 @@ double chebyshevcalculate(ae_int_t r,
         result = b;
         return result;
     }
-    
+
     /*
      * General case: N>=2
      */
@@ -6720,6 +6731,7 @@ double chebyshevsum(/* Real    */ ae_vector* c,
      double x,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
     double b1;
     double b2;
     ae_int_t i;
@@ -6792,7 +6804,7 @@ B[0] + B[1]*X + ... + B[N]*X^N.
 Input parameters:
     A   -   Chebyshev series coefficients
     N   -   degree, N>=0
-    
+
 Output parameters
     B   -   power series coefficients
 *************************************************************************/
@@ -7004,6 +7016,7 @@ Copyright 1984, 1987, 1989, 2000 by Stephen L. Moshier
 *************************************************************************/
 double dawsonintegral(double x, ae_state *_state)
 {
+    Q_UNUSED(_state)
     double x2;
     double y;
     ae_int_t sg;
@@ -7503,19 +7516,19 @@ double incompleteellipticintegrale(double phi, double m, ae_state *_state)
     }
     t = ae_tan(lphi, _state);
     b = ae_sqrt(a, _state);
-    
+
     /*
      * Thanks to Brian Fitzgerald <fitzgb@mml0.meche.rpi.edu>
      * for pointing out an instability near odd multiples of pi/2
      */
     if( ae_fp_greater(ae_fabs(t, _state),10) )
     {
-        
+
         /*
          * Transform the amplitude
          */
         e = 1.0/(b*t);
-        
+
         /*
          * ... but avoid multiple recursions.
          */
@@ -8086,12 +8099,12 @@ double invfdistribution(ae_int_t a,
 
 
     ae_assert(((a>=1&&b>=1)&&ae_fp_greater(y,0))&&ae_fp_less_eq(y,1), "Domain error in InvFDistribution", _state);
-    
+
     /*
      * Compute probability for x = 0.5
      */
     w = incompletebeta(0.5*b, 0.5*a, 0.5, _state);
-    
+
     /*
      * If that is greater than y, then the solution w < .5
      * Otherwise, solve at 1-y to remove cancellation in (b - b*w)
@@ -8295,6 +8308,7 @@ Result:
 *************************************************************************/
 double hermitecalculate(ae_int_t n, double x, ae_state *_state)
 {
+    Q_UNUSED(_state)
     ae_int_t i;
     double a;
     double b;
@@ -8302,13 +8316,13 @@ double hermitecalculate(ae_int_t n, double x, ae_state *_state)
 
 
     result = 0;
-    
+
     /*
      * Prepare A and B
      */
     a = 1;
     b = 2*x;
-    
+
     /*
      * Special cases: N=0 or N=1
      */
@@ -8322,7 +8336,7 @@ double hermitecalculate(ae_int_t n, double x, ae_state *_state)
         result = b;
         return result;
     }
-    
+
     /*
      * General case: N>=2
      */
@@ -8354,6 +8368,7 @@ double hermitesum(/* Real    */ ae_vector* c,
      double x,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
     double b1;
     double b2;
     ae_int_t i;
@@ -8553,6 +8568,7 @@ Result:
 *************************************************************************/
 double laguerrecalculate(ae_int_t n, double x, ae_state *_state)
 {
+    Q_UNUSED(_state)
     double a;
     double b;
     double i;
@@ -8595,6 +8611,7 @@ double laguerresum(/* Real    */ ae_vector* c,
      double x,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
     double b1;
     double b2;
     ae_int_t i;
@@ -8654,6 +8671,7 @@ Result:
 *************************************************************************/
 double legendrecalculate(ae_int_t n, double x, ae_state *_state)
 {
+    Q_UNUSED(_state)
     double a;
     double b;
     ae_int_t i;
@@ -8701,6 +8719,7 @@ double legendresum(/* Real    */ ae_vector* c,
      double x,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
     double b1;
     double b2;
     ae_int_t i;
@@ -9624,6 +9643,7 @@ static void trigintegrals_chebiterationshichi(double x,
      double* b2,
      ae_state *_state)
 {
+    Q_UNUSED(_state)
 
 
     *b2 = *b1;
