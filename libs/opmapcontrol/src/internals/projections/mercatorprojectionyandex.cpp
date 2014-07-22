@@ -3,31 +3,31 @@
 *
 * @file       mercatorprojectionyandex.cpp
 * @author     The OpenPilot Team, http://www.openpilot.org Copyright (C) 2010.
-* @brief      
+* @brief
 * @see        The GNU Public License (GPL) Version 3
 * @defgroup   OPMapWidget
 * @{
-* 
+*
 *****************************************************************************/
-/* 
-* This program is free software; you can redistribute it and/or modify 
-* it under the terms of the GNU General Public License as published by 
-* the Free Software Foundation; either version 3 of the License, or 
+/*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 3 of the License, or
 * (at your option) any later version.
-* 
-* This program is distributed in the hope that it will be useful, but 
-* WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
-* or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License 
+*
+* This program is distributed in the hope that it will be useful, but
+* WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+* or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
 * for more details.
-* 
-* You should have received a copy of the GNU General Public License along 
-* with this program; if not, write to the Free Software Foundation, Inc., 
+*
+* You should have received a copy of the GNU General Public License along
+* with this program; if not, write to the Free Software Foundation, Inc.,
 * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 #include "mercatorprojectionyandex.h"
 #include <qmath.h>
 
- 
+
 namespace projections {
 MercatorProjectionYandex::MercatorProjectionYandex():MinLatitude(-85.05112878), MaxLatitude(85.05112878),MinLongitude(-177),
 MaxLongitude(177), RAD_DEG(180 / M_PI),DEG_RAD(M_PI / 180),MathPiDiv4(M_PI / 4),tileSize(256, 256)
@@ -59,11 +59,6 @@ Point MercatorProjectionYandex::FromLatLngToPixel(double lat, double lng, const 
 }
 internals::PointLatLng MercatorProjectionYandex::FromPixelToLatLng(const int &x, const int &y, const int &zoom)
 {
-    Size s = GetTileMatrixSizePixel(zoom);
-
-    //double mapSizeX = s.Width();
-    //double mapSizeY = s.Height();
-
     double a = 6378137;
     double c1 = 0.00335655146887969;
     double c2 = 0.00000657187271079536;
