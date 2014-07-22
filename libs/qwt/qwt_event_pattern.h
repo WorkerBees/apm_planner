@@ -135,12 +135,12 @@ public:
     class MousePattern
     {
     public:
-        MousePattern(int btn = Qt::NoButton, int st = Qt::NoButton) {
+        MousePattern(Qt::MouseButton btn = Qt::NoButton, int st = Qt::NoButton) {
             button = btn;
             state = st;
         }
 
-        int button;
+        Qt::MouseButton button;
         int state;
     };
 
@@ -148,12 +148,12 @@ public:
     class KeyPattern
     {
     public:
-        KeyPattern(int k = 0, int st = Qt::NoButton) {
+        KeyPattern(Qt::Key k = (Qt::Key)0, int st = Qt::NoButton) {
             key = k;
             state = st;
         }
 
-        int key;
+        Qt::Key key;
         int state;
     };
 
@@ -163,8 +163,8 @@ public:
     void initMousePattern(int numButtons);
     void initKeyPattern();
 
-    void setMousePattern(uint pattern, int button, int state = Qt::NoButton);
-    void setKeyPattern(uint pattern, int key, int state = Qt::NoButton);
+    void setMousePattern(uint pattern, Qt::MouseButton button, int state = Qt::NoButton);
+    void setKeyPattern(uint pattern, Qt::Key key, int state = Qt::NoButton);
 
     void setMousePattern(const QwtArray<MousePattern> &);
     void setKeyPattern(const QwtArray<KeyPattern> &);

@@ -107,7 +107,7 @@ void QwtEventPattern::initKeyPattern()
 
   \sa QMouseEvent
 */
-void QwtEventPattern::setMousePattern(uint pattern, int button, int state)
+void QwtEventPattern::setMousePattern(uint pattern, Qt::MouseButton button, int state)
 {
     if ( pattern < (uint)d_mousePattern.count() ) {
         d_mousePattern[int(pattern)].button = button;
@@ -124,7 +124,7 @@ void QwtEventPattern::setMousePattern(uint pattern, int button, int state)
 
   \sa QKeyEvent
 */
-void QwtEventPattern::setKeyPattern(uint pattern, int key, int state)
+void QwtEventPattern::setKeyPattern(uint pattern, Qt::Key key, int state)
 {
     if ( pattern < (uint)d_keyPattern.count() ) {
         d_keyPattern[int(pattern)].key = key;
@@ -219,7 +219,7 @@ bool QwtEventPattern::mouseMatch(const MousePattern &pattern,
         (pattern.state & Qt::KeyButtonMask);
 #else
         (e->modifiers() & Qt::KeyboardModifierMask) ==
-        (int)(pattern.state & Qt::KeyboardModifierMask);
+        (pattern.state & Qt::KeyboardModifierMask);
 #endif
 
     return matched;
@@ -274,7 +274,7 @@ bool QwtEventPattern::keyMatch(
         (pattern.state & Qt::KeyButtonMask);
 #else
         (e->modifiers() & Qt::KeyboardModifierMask) ==
-        (int)(pattern.state & Qt::KeyboardModifierMask);
+        (pattern.state & Qt::KeyboardModifierMask);
 #endif
 
     return matched;

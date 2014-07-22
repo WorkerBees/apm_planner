@@ -44,14 +44,14 @@ public:
     int wheelButtonState;
 
     double mouseFactor;
-    int mouseButton;
+    Qt::MouseButton mouseButton;
     int mouseButtonState;
 
     double keyFactor;
-    int zoomInKey;
-    int zoomOutKey;
-    int zoomInKeyModifiers;
-    int zoomOutKeyModifiers;
+    Qt::Key zoomInKey;
+    Qt::Key zoomOutKey;
+    Qt::KeyboardModifiers zoomInKeyModifiers;
+    Qt::KeyboardModifiers zoomOutKeyModifiers;
 
     bool mousePressed;
     bool hasMouseTracking;
@@ -186,7 +186,7 @@ double QwtMagnifier::mouseFactor() const
    \param buttonState Button state
    \sa getMouseButton
 */
-void QwtMagnifier::setMouseButton(int button, int buttonState)
+void QwtMagnifier::setMouseButton(Qt::MouseButton button, int buttonState)
 {
     d_data->mouseButton = button;
     d_data->mouseButtonState = buttonState;
@@ -194,7 +194,7 @@ void QwtMagnifier::setMouseButton(int button, int buttonState)
 
 //! \sa setMouseButton
 void QwtMagnifier::getMouseButton(
-    int &button, int &buttonState) const
+    Qt::MouseButton &button, int &buttonState) const
 {
     button = d_data->mouseButton;
     buttonState = d_data->mouseButtonState;
@@ -233,14 +233,14 @@ double QwtMagnifier::keyFactor() const
    \param modifiers
    \sa getZoomInKey(), setZoomOutKey()
 */
-void QwtMagnifier::setZoomInKey(int key, int modifiers)
+void QwtMagnifier::setZoomInKey(Qt::Key key, Qt::KeyboardModifiers modifiers)
 {
     d_data->zoomInKey = key;
     d_data->zoomInKeyModifiers = modifiers;
 }
 
 //! \sa setZoomInKey
-void QwtMagnifier::getZoomInKey(int &key, int &modifiers) const
+void QwtMagnifier::getZoomInKey(Qt::Key &key, Qt::KeyboardModifiers &modifiers) const
 {
     key = d_data->zoomInKey;
     modifiers = d_data->zoomInKeyModifiers;
@@ -254,14 +254,14 @@ void QwtMagnifier::getZoomInKey(int &key, int &modifiers) const
    \param modifiers
    \sa getZoomOutKey(), setZoomOutKey()
 */
-void QwtMagnifier::setZoomOutKey(int key, int modifiers)
+void QwtMagnifier::setZoomOutKey(Qt::Key key, Qt::KeyboardModifiers modifiers)
 {
     d_data->zoomOutKey = key;
     d_data->zoomOutKeyModifiers = modifiers;
 }
 
 //! \sa setZoomOutKey
-void QwtMagnifier::getZoomOutKey(int &key, int &modifiers) const
+void QwtMagnifier::getZoomOutKey(Qt::Key &key, Qt::KeyboardModifiers &modifiers) const
 {
     key = d_data->zoomOutKey;
     modifiers = d_data->zoomOutKeyModifiers;
@@ -327,7 +327,7 @@ void QwtMagnifier::widgetMousePressEvent(QMouseEvent *me)
             (d_data->mouseButtonState & Qt::KeyButtonMask) )
 #else
     if ( (me->modifiers() & Qt::KeyboardModifierMask) !=
-            (int)(d_data->mouseButtonState & Qt::KeyboardModifierMask) )
+            (d_data->mouseButtonState & Qt::KeyboardModifierMask) )
 #endif
     {
         return;
@@ -387,7 +387,7 @@ void QwtMagnifier::widgetWheelEvent(QWheelEvent *we)
             (d_data->wheelButtonState & Qt::KeyButtonMask) )
 #else
     if ( (we->modifiers() & Qt::KeyboardModifierMask) !=
-            (int)(d_data->wheelButtonState & Qt::KeyboardModifierMask) )
+            (d_data->wheelButtonState & Qt::KeyboardModifierMask) )
 #endif
     {
         return;
@@ -424,7 +424,7 @@ void QwtMagnifier::widgetKeyPressEvent(QKeyEvent *ke)
 #if QT_VERSION < 0x040000
     const int state = ke->state();
 #else
-    const int state = ke->modifiers();
+    const Qt::KeyboardModifiers state = ke->modifiers();
 #endif
 
     if ( key == d_data->zoomInKey &&

@@ -42,8 +42,8 @@ public:
     void setMouseFactor(double);
     double mouseFactor() const;
 
-    void setMouseButton(int button, int buttonState = Qt::NoButton);
-    void getMouseButton(int &button, int &buttonState) const;
+    void setMouseButton(Qt::MouseButton button, int buttonState = Qt::NoButton);
+    void getMouseButton(Qt::MouseButton &button, int &buttonState) const;
 
     // mouse wheel
     void setWheelFactor(double);
@@ -56,11 +56,11 @@ public:
     void setKeyFactor(double);
     double keyFactor() const;
 
-    void setZoomInKey(int key, int modifiers);
-    void getZoomInKey(int &key, int &modifiers) const;
+    void setZoomInKey(Qt::Key key, Qt::KeyboardModifiers modifiers);
+    void getZoomInKey(Qt::Key &key, Qt::KeyboardModifiers &modifiers) const;
 
-    void setZoomOutKey(int key, int modifiers);
-    void getZoomOutKey(int &key, int &modifiers) const;
+    void setZoomOutKey(Qt::Key key, Qt::KeyboardModifiers modifiers);
+    void getZoomOutKey(Qt::Key &key, Qt::KeyboardModifiers &modifiers) const;
 
     virtual bool eventFilter(QObject *, QEvent *);
 
