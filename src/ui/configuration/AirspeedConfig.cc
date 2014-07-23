@@ -40,6 +40,8 @@ AirspeedConfig::~AirspeedConfig()
 }
 void AirspeedConfig::parameterChanged(int uas, int component, QString parameterName, QVariant value)
 {
+    Q_UNUSED(uas)
+    Q_UNUSED(component)
     if (parameterName == "ARSPD_ENABLE")
     {
         if (value.toInt() == 0)

@@ -79,7 +79,7 @@ LogDownloadDialog::LogDownloadDialog(QWidget *parent) :
     m_lastDownloadOffset(0),
     m_downloadMaxSize(100)
 {
-    ui->setupUi(this); 
+    ui->setupUi(this);
 
     ui->refreshPushButton->setEnabled(false);
     ui->getPushButton->setEnabled(false);
@@ -334,6 +334,8 @@ void LogDownloadDialog::logData(uint32_t uasId, uint32_t ofs, uint16_t id,
 #ifdef SIMULATE_PACKET_LOSS
     QLOG_DEBUG() << "logData ofs:" << ofs << " id:" << id << " count:" << count
                  /*<< " data:" << data*/;
+#else
+    Q_UNUSED(id)
 #endif
     if (m_uas == NULL || m_downloadSet == NULL)
         return;

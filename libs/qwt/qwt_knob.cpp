@@ -498,6 +498,7 @@ void QwtKnob::scaleChange()
 */
 void QwtKnob::fontChange(const QFont &f)
 {
+    Q_UNUSED(f)
     //QwtAbstractSlider::fontChange( f );
     layoutKnob();
 }

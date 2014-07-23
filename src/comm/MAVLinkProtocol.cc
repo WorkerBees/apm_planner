@@ -38,6 +38,7 @@ This file is part of the APM_PLANNER project
 
 MAVLinkProtocol::MAVLinkProtocol(QObject *parent)
 {
+    Q_UNUSED(parent)
     m_loggingEnabled = false;
     m_logfile=NULL;
 }

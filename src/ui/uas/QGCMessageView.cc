@@ -46,6 +46,7 @@ void QGCMessageView::setActiveUAS(UASInterface* uas)
 
 void QGCMessageView::handleTextMessage(int uasid, int componentid, int severity, QString text)
 {
+    Q_UNUSED(severity)
     // XXX color messages according to severity
 
     ui->plainTextEdit->appendHtml(QString("<font color=\"%1\">[%2:%3] %4</font>\n").arg(UASManager::instance()->getUASForId(uasid)->getColor().name()).arg(UASManager::instance()->getUASForId(uasid)->getUASName()).arg(componentid).arg(text));

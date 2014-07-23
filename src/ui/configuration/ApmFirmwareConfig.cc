@@ -817,6 +817,7 @@ QString ApmFirmwareConfig::processPortInfo(const QSerialPortInfo &info)
 
 void ApmFirmwareConfig::firmwareListError(QNetworkReply::NetworkError error)
 {
+    Q_UNUSED(error)
     QNetworkReply *reply = qobject_cast<QNetworkReply*>(sender());
     QLOG_ERROR() << "Error!" << reply->errorString();
 }

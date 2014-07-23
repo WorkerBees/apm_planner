@@ -72,8 +72,6 @@ void UASQuickViewItemSelect::addItem(QString item,bool enabled)
     label->setText(name);
     label->show();
     //ui.gridLayout->addWidget(label,currrow,currcol++);
-    bool breakout = false;
-    int row = -1;
     /*    while (!breakout)
     {
          if (!ui.gridLayout->itemAtPosition(++row,col) || row > 100)
@@ -89,6 +87,7 @@ void UASQuickViewItemSelect::addItem(QString item,bool enabled)
 }
 void UASQuickViewItemSelect::resizeEvent(QResizeEvent *event)
 {
+    Q_UNUSED(event)
     /*for (int i=0;i<m_checkBoxList.size();i++)
     {
         ui.gridLayout->removeWidget(m_checkBoxList[i]);

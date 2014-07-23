@@ -73,7 +73,7 @@ MAVLinkDecoder::MAVLinkDecoder(QObject *parent) : QObject(parent)
 }
 void MAVLinkDecoder::sendMessage(mavlink_message_t msg)
 {
-
+    Q_UNUSED(msg)
 }
 
 

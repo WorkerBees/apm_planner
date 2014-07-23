@@ -62,8 +62,6 @@ private:
     int d_count;
     QwtArray<double> d_x;
     QwtArray<double> d_y;
-    QTimer *d_timer;
-    int d_timerCount;
 };
 
 /**

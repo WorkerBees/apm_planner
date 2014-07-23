@@ -17,6 +17,7 @@ QGCMAVLinkInspector::QGCMAVLinkInspector(MAVLinkProtocol* protocol, QWidget *par
     m_uas(0),
     ui(new Ui::QGCMAVLinkInspector)
 {
+    Q_UNUSED(protocol)
     ui->setupUi(this);
 
     // Make sure "All" is an option for both the system and components

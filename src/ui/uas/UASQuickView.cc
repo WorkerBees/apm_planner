@@ -267,6 +267,7 @@ void UASQuickView::sortItems(int columncount)
 }
 void UASQuickView::resizeEvent(QResizeEvent *evt)
 {
+    Q_UNUSED(evt)
     recalculateItemTextSizing();
 }
 void UASQuickView::recalculateItemTextSizing()
@@ -344,10 +345,12 @@ void UASQuickView::setActiveUAS(UASInterface* uas)
 }
 void UASQuickView::addSource(MAVLinkDecoder *decoder)
 {
+    Q_UNUSED(decoder)
     //connect(decoder,SIGNAL(valueChanged(int,QString,QString,QVariant,quint64)),this,SLOT(valueChanged(int,QString,QString,QVariant,quint64)));
 }
 void UASQuickView::valueUpdate(const int uasId,const QString &name,const QString &unit,const double value,const quint64 msec)
 {
+    Q_UNUSED(msec)
     if (this->uas->getUASID() != uasId)
     {
         //This message is for the non active UAS

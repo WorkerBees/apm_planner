@@ -63,6 +63,8 @@ void StandardParamConfig::addCombo(QString title,QString description,QString par
 }
 void StandardParamConfig::parameterChanged(int uas, int component, QString parameterName, QVariant value)
 {
+    Q_UNUSED(uas)
+    Q_UNUSED(component)
     if (paramToWidgetMap.contains(parameterName))
     {
         if (value.type() == QVariant::Double || value.type() == QMetaType::Float)
