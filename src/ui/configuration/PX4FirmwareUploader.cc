@@ -560,6 +560,8 @@ void PX4FirmwareUploader::run()
                     emit statusUpdate("COA verification successful");
                 }
 #else
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
                 // [TODO] Need to read XML file of list of authorized keys.
 
                 // 3DR COA Public Key
@@ -593,6 +595,7 @@ void PX4FirmwareUploader::run()
                     QLOG_DEBUG() << "COA verification successful";
                     emit statusUpdate("COA verification successful");
                 }
+#pragma clang diagnostic pop
 #endif //Q_OS_WIN
 
                 //QLOG_INFO() << "COA Successful";
