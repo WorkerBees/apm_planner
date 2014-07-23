@@ -138,13 +138,13 @@ MacBuild {
     DEFINES += GIT_COMMIT=$$system(git describe --dirty=-DEV --always)
     DEFINES += GIT_HASH=$$system(git log -n 1 --pretty=format:%H)
 
-    QMAKE_CXXFLAGS_DEBUG += -stdlib=libstdc++
-    QMAKE_CXXFLAGS_RELEASE += -stdlib=libstdc++
+    QMAKE_CXXFLAGS_DEBUG += -stdlib=libstdc++ -Werror -Wno-error=\\$${LITERAL_HASH}warnings
+    QMAKE_CXXFLAGS_RELEASE += -stdlib=libstdc++ -Werror -Wno-error=\\$${LITERAL_HASH}warnings
 
     LIBS += -lz
     LIBS += -lssl -lcrypto
     LIBS += -framework ApplicationServices
-    LIBS += -stdlib=libstdc++
+    LIBS += -stdlib=libstdc++ -Werror -Wno-error=\\$${LITERAL_HASH}warnings
 }
 
 LinuxBuild {
