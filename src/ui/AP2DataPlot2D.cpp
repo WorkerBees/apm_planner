@@ -19,10 +19,10 @@
 #include "MainWindow.h"
 #include "ArduPilotMegaMAV.h"
 AP2DataPlot2D::AP2DataPlot2D(QWidget *parent) : QWidget(parent),
-    m_uas(NULL),
-    m_logDownloadDialog(NULL),
     m_updateTimer(NULL),
+    m_uas(NULL),
     m_tlogReplayEnabled(false),
+    m_logDownloadDialog(NULL),
     m_loadedLogMavType(MAV_TYPE_ENUM_END)
 {
     m_startIndex = 0;
