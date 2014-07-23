@@ -1269,6 +1269,11 @@ void AP2DataPlot2D::threadDone(int errors,MAV_TYPE type)
                 switch (type)
                 {
                     case MAV_TYPE_QUADROTOR:
+                    case MAV_TYPE_HEXAROTOR:
+                    case MAV_TYPE_OCTOROTOR:
+                    case MAV_TYPE_TRICOPTER:
+                    case MAV_TYPE_HELICOPTER:
+                    case MAV_TYPE_COAXIAL:
                     {
                         mode = ApmCopter::stringForMode(modeint);
                     }
@@ -1282,6 +1287,8 @@ void AP2DataPlot2D::threadDone(int errors,MAV_TYPE type)
                     {
                         mode = ApmRover::stringForMode(modeint);
                     }
+                    break;
+                    default:
                     break;
                 }
             }
