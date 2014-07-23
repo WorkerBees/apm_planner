@@ -239,7 +239,7 @@ void AdvParameterList::saveButtonClicked()
     {
         QVariant value;
         m_uas->getParamManager()->getParameterValue(1,paramnamelist[i],value);
-        if (value.type() == QVariant::Double || value.type() == QMetaType::Float)
+        if ((QMetaType::Type)value.type() == QMetaType::Double || (QMetaType::Type)value.type() == QMetaType::Float)
         {
             file.write(paramnamelist[i].append(",").append(QString::number(value.toFloat(),'f',8)).append("\r\n").toLatin1());
         }
@@ -267,7 +267,7 @@ void AdvParameterList::parameterChanged(int /*uas*/, int /*component*/, QString 
 
         // Param value
         QString valstr = "";
-        if (value.type() == QMetaType::Float || value.type() == QVariant::Double)
+        if ((QMetaType::Type)value.type() == QMetaType::Float || (QMetaType::Type)value.type() == QMetaType::Double)
         {
             valstr = QString::number(value.toFloat(),'f',4);
         }
@@ -343,7 +343,7 @@ void AdvParameterList::parameterChanged(int /*uas*/, int /*component*/, QString 
     }
 
     QString valstr = "";
-    if (value.type() == QMetaType::Float || value.type() == QVariant::Double)
+    if ((QMetaType::Type)value.type() == QMetaType::Float || (QMetaType::Type)value.type() == QMetaType::Double)
     {
         valstr = QString::number(value.toFloat(),'f',6);
     }

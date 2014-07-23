@@ -672,7 +672,7 @@ void AP2DataPlot2D::updateValue(const int uasId, const QString& name, const QStr
 
 void AP2DataPlot2D::valueChanged(const int uasId, const QString& name, const QString& unit, const QVariant& value,const quint64 msec)
 {
-    if (value.type() == QVariant::Double || value.type() == QMetaType::Float)
+    if ((QMetaType::Type)value.type() == QMetaType::Double || (QMetaType::Type)value.type() == QMetaType::Float)
     {
         updateValue(uasId,name,unit,value.toDouble(),msec,false);
     }

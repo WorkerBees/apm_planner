@@ -67,7 +67,7 @@ void StandardParamConfig::parameterChanged(int uas, int component, QString param
     Q_UNUSED(component)
     if (paramToWidgetMap.contains(parameterName))
     {
-        if (value.type() == QVariant::Double || value.type() == QMetaType::Float)
+        if ((QMetaType::Type)value.type() == QMetaType::Double || (QMetaType::Type)value.type() == QMetaType::Float)
         {
             paramToWidgetMap[parameterName]->setValue(value.toDouble());
         }
