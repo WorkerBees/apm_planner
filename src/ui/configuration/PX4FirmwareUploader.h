@@ -25,7 +25,7 @@ private:
     bool reqInfo(unsigned char infobyte,unsigned int *reply);
     int readBytes(int num,int timeout,QByteArray &buf);
     unsigned int m_loadedBoardID;
-    unsigned int m_loadedFwSize;
+    int m_loadedFwSize;
     QString m_loadedDescription;
     QTemporaryFile *tempFile;
     QTemporaryFile *tempJsonFile;

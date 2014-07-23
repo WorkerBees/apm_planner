@@ -59,7 +59,7 @@ static const quint32 crctab[] =
 static quint32 crc32(const QByteArray src)
 {
     quint32 state = 0;
-    for (unsigned i = 0; i < src.size(); i++)
+    for (int i = 0; i < src.size(); i++)
     {
         state = crctab[(state ^ static_cast<unsigned char>(src[i])) & 0xff] ^ (state >> 8);
     }
