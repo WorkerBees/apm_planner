@@ -81,6 +81,7 @@ inline void manage_caching_sizes(Action action, std::ptrdiff_t* l1=0, std::ptrdi
 template<typename LhsScalar, typename RhsScalar, int KcFactor>
 void computeProductBlockingSizes(std::ptrdiff_t& k, std::ptrdiff_t& m, std::ptrdiff_t& n)
 {
+  (void)n; // Unused parameter
   // Explanations:
   // Let's recall the product algorithms form kc x nc horizontal panels B' on the rhs and
   // mc x kc blocks A' on the lhs. A' has to fit into L2 cache. Moreover, B' is processed
@@ -102,7 +103,6 @@ void computeProductBlockingSizes(std::ptrdiff_t& k, std::ptrdiff_t& m, std::ptrd
   k = std::min<std::ptrdiff_t>(k, l1/kdiv);
   std::ptrdiff_t _m = k>0 ? l2/(4 * sizeof(LhsScalar) * k) : 0;
   if(_m<m) m = _m & mr_mask;
-  n = n;
 }
 
 template<typename LhsScalar, typename RhsScalar>
@@ -143,10 +143,10 @@ inline void computeProductBlockingSizes(std::ptrdiff_t& k, std::ptrdiff_t& m, st
 
 /* Vectorization logic
  *  real*real: unpack rhs to constant packets, ...
- * 
+ *
  *  cd*cd : unpack rhs to (b_r,b_r), (b_i,b_i), mul to get (a_r b_r,a_i b_r) (a_r b_i,a_i b_i),
  *          storing each res packet into two packets (2x2),
- *          at the end combine them: swap the second and addsub them 
+ *          at the end combine them: swap the second and addsub them
  *  cf*cf : same but with 2x4 blocks
  *  cplx*real : unpack rhs to constant packets, ...
  *  real*cplx : load lhs as (a0,a0,a1,a1), and mul as usual
@@ -166,7 +166,7 @@ public:
     LhsPacketSize = Vectorizable ? packet_traits<LhsScalar>::size : 1,
     RhsPacketSize = Vectorizable ? packet_traits<RhsScalar>::size : 1,
     ResPacketSize = Vectorizable ? packet_traits<ResScalar>::size : 1,
-    
+
     NumberOfRegisters = EIGEN_ARCH_DEFAULT_NUMBER_OF_REGISTERS,
 
     // register block size along the N direction (must be either 2 or 4)
@@ -174,7 +174,7 @@ public:
 
     // register block size along the M direction (currently, this one cannot be modified)
     mr = 2 * LhsPacketSize,
-    
+
     WorkSpaceFactor = nr * RhsPacketSize,
 
     LhsProgress = LhsPacketSize,
@@ -190,7 +190,7 @@ public:
   typedef typename conditional<Vectorizable,_ResPacket,ResScalar>::type ResPacket;
 
   typedef ResPacket AccPacket;
-  
+
   EIGEN_STRONG_INLINE void initAcc(AccPacket& p)
   {
     p = pset1<ResPacket>(ResScalar(0));
@@ -242,7 +242,7 @@ public:
     LhsPacketSize = Vectorizable ? packet_traits<LhsScalar>::size : 1,
     RhsPacketSize = Vectorizable ? packet_traits<RhsScalar>::size : 1,
     ResPacketSize = Vectorizable ? packet_traits<ResScalar>::size : 1,
-    
+
     NumberOfRegisters = EIGEN_ARCH_DEFAULT_NUMBER_OF_REGISTERS,
     nr = NumberOfRegisters/4,
     mr = 2 * LhsPacketSize,
@@ -315,7 +315,7 @@ public:
   typedef std::complex<RealScalar>  LhsScalar;
   typedef std::complex<RealScalar>  RhsScalar;
   typedef std::complex<RealScalar>  ResScalar;
-  
+
   enum {
     ConjLhs = _ConjLhs,
     ConjRhs = _ConjRhs,
@@ -323,7 +323,7 @@ public:
                 && packet_traits<Scalar>::Vectorizable,
     RealPacketSize  = Vectorizable ? packet_traits<RealScalar>::size : 1,
     ResPacketSize   = Vectorizable ? packet_traits<ResScalar>::size : 1,
-    
+
     nr = 2,
     mr = 2 * ResPacketSize,
     WorkSpaceFactor = Vectorizable ? 2*nr*RealPacketSize : nr,
@@ -331,7 +331,7 @@ public:
     LhsProgress = ResPacketSize,
     RhsProgress = Vectorizable ? 2*ResPacketSize : 1
   };
-  
+
   typedef typename packet_traits<RealScalar>::type RealPacket;
   typedef typename packet_traits<Scalar>::type     ScalarPacket;
   struct DoublePacket
@@ -344,7 +344,7 @@ public:
   typedef typename conditional<Vectorizable,DoublePacket,Scalar>::type RhsPacket;
   typedef typename conditional<Vectorizable,ScalarPacket,Scalar>::type ResPacket;
   typedef typename conditional<Vectorizable,DoublePacket,Scalar>::type AccPacket;
-  
+
   EIGEN_STRONG_INLINE void initAcc(Scalar& p) { p = Scalar(0); }
 
   EIGEN_STRONG_INLINE void initAcc(DoublePacket& p)
@@ -395,9 +395,9 @@ public:
   {
     c = cj.pmadd(a,b,c);
   }
-  
+
   EIGEN_STRONG_INLINE void acc(const Scalar& c, const Scalar& alpha, Scalar& r) const { r += alpha * c; }
-  
+
   EIGEN_STRONG_INLINE void acc(const DoublePacket& c, const ResPacket& alpha, ResPacket& r) const
   {
     // assemble c
@@ -422,7 +422,7 @@ public:
       tmp = pcplxflip(ResPacket(c.second));
       tmp = psub(pconj(ResPacket(c.first)),tmp);
     }
-    
+
     r = pmadd(tmp,alpha,r);
   }
 
@@ -447,7 +447,7 @@ public:
     LhsPacketSize = Vectorizable ? packet_traits<LhsScalar>::size : 1,
     RhsPacketSize = Vectorizable ? packet_traits<RhsScalar>::size : 1,
     ResPacketSize = Vectorizable ? packet_traits<ResScalar>::size : 1,
-    
+
     NumberOfRegisters = EIGEN_ARCH_DEFAULT_NUMBER_OF_REGISTERS,
     nr = 4,
     mr = 2*ResPacketSize,
@@ -541,7 +541,7 @@ struct gebp_kernel
                   Index strideA=-1, Index strideB=-1, Index offsetA=0, Index offsetB=0, RhsScalar* unpackedB = 0)
   {
     Traits traits;
-    
+
     if(strideA==-1) strideA = depth;
     if(strideB==-1) strideB = depth;
     conj_helper<LhsScalar,RhsScalar,ConjugateLhs,ConjugateRhs> cj;
@@ -558,7 +558,7 @@ struct gebp_kernel
     // loops on each micro vertical panel of rhs (depth x nr)
     for(Index j2=0; j2<packet_cols; j2+=nr)
     {
-      traits.unpackRhs(depth*nr,&blockB[j2*strideB+offsetB*nr],unpackedB); 
+      traits.unpackRhs(depth*nr,&blockB[j2*strideB+offsetB*nr],unpackedB);
 
       // loops on each largest micro horizontal panel of lhs (mr x depth)
       // => we select a mr x nr micro block of res which is entirely
@@ -600,7 +600,7 @@ struct gebp_kernel
             LhsPacket A0, A1;
             RhsPacket B0;
             RhsPacket T0;
-            
+
 EIGEN_ASM_COMMENT("mybegin2");
             traits.loadLhs(&blA[0*LhsProgress], A0);
             traits.loadLhs(&blA[1*LhsProgress], A1);
@@ -645,7 +645,7 @@ EIGEN_ASM_COMMENT("mybegin4");
             LhsPacket A0, A1;
             RhsPacket B0, B1, B2, B3;
             RhsPacket T0;
-            
+
             traits.loadLhs(&blA[0*LhsProgress], A0);
             traits.loadLhs(&blA[1*LhsProgress], A1);
             traits.loadRhs(&blB[0*RhsProgress], B0);
@@ -777,7 +777,7 @@ EIGEN_ASM_COMMENT("mybegin4");
           traits.acc(C5, alphav, R5);
           traits.acc(C6, alphav, R6);
           traits.acc(C7, alphav, R0);
-          
+
           pstoreu(r1, R1);
           pstoreu(r2, R2);
           pstoreu(r3, R3);
@@ -804,9 +804,9 @@ EIGEN_ASM_COMMENT("mybegin4");
           pstoreu(r0 + ResPacketSize, R4);
           pstoreu(r1 + ResPacketSize, R0);
         }
-        
+
       }
-      
+
       if(rows-peeled_mc>=LhsProgress)
       {
         Index i = peeled_mc;
