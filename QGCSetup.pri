@@ -27,7 +27,7 @@ COPY_RESOURCE_LIST = \
     $$BASEDIR/files \
     $$BASEDIR/qml \
     $$BASEDIR/data
-    
+
 WindowsBuild {
 	DESTDIR_COPY_RESOURCE_LIST = $$replace(DESTDIR,"/","\\")
     COPY_RESOURCE_LIST = $$replace(COPY_RESOURCE_LIST, "/","\\")
@@ -43,7 +43,7 @@ MacBuild {
     DESTDIR_COPY_RESOURCE_LIST = $$DESTDIR/$${TARGET}.app/Contents/MacOS
     CONCATCMD = &&
 }
-    
+
 for(COPY_DIR, COPY_RESOURCE_LIST):QMAKE_POST_LINK += $$CONCATCMD $$QMAKE_COPY_DIR $${COPY_DIR} $$DESTDIR_COPY_RESOURCE_LIST
 
 #
@@ -57,95 +57,122 @@ MacBuild {
 
 	# Fix library paths inside executable
 
-    INSTALL_NAME_TARGET = $$DESTDIR/$${TARGET}.app/Contents/MacOS/$${TARGET}
-    INSTALL_NAME_LIB_LIST = \
-        libOpenThreads.dylib \
-        libosg.dylib \
-        libosgViewer.dylib \
-        libosgGA.dylib \
-        libosgDB.dylib \
-        libosgText.dylib \
-        libosgWidget.dylib
-    for(INSTALL_NAME_LIB, INSTALL_NAME_LIB_LIST) {
-        QMAKE_POST_LINK += && install_name_tool -change $$INSTALL_NAME_LIB "@executable_path/../libs/$${INSTALL_NAME_LIB}" $$INSTALL_NAME_TARGET
-    }
+    QMAKE_POST_LINK += && install_name_tool -add_rpath "@executable_path/../libs" $$DESTDIR/$${TARGET}.app/Contents/MacOS/$${TARGET}
 
 	# Fix library paths within libraries (inter-library dependencies)
 
-	# OSG GA LIBRARY
-    INSTALL_NAME_TARGET = $$DESTDIR/$${TARGET}.app/Contents/libs/libosgGA.dylib
+    # Main osg libs
     INSTALL_NAME_LIB_LIST = \
         libOpenThreads.dylib \
         libosg.dylib \
+        libosgAnimation.dylib \
+        libosgDB.dylib \
+        libosgFX.dylib \
         libosgGA.dylib \
-        libosgDB.dylib \
-        libosgUtil.dylib
-    for(INSTALL_NAME_LIB, INSTALL_NAME_LIB_LIST) {
-        QMAKE_POST_LINK += && install_name_tool -change $$INSTALL_NAME_LIB "@executable_path/../libs/$${INSTALL_NAME_LIB}" $$INSTALL_NAME_TARGET
-    }
-
-	# OSG DB LIBRARY
-    INSTALL_NAME_TARGET = $$DESTDIR/$${TARGET}.app/Contents/libs/libosgDB.dylib
-    INSTALL_NAME_LIB_LIST = \
-        libOpenThreads.dylib \
-        libosg.dylib \
-        libosgDB.dylib \
-        libosgUtil.dylib
-    for(INSTALL_NAME_LIB, INSTALL_NAME_LIB_LIST) {
-        QMAKE_POST_LINK += && install_name_tool -change $$INSTALL_NAME_LIB "@executable_path/../libs/$${INSTALL_NAME_LIB}" $$INSTALL_NAME_TARGET
-    }
-
-	# OSG TEXT LIBRARY
-    INSTALL_NAME_TARGET = $$DESTDIR/$${TARGET}.app/Contents/libs/libosgText.dylib
-    INSTALL_NAME_LIB_LIST = \
-        libOpenThreads.dylib \
-        libosg.dylib \
-        libosgDB.dylib \
-        libosgUtil.dylib \
-        libosgText.dylib
-    for(INSTALL_NAME_LIB, INSTALL_NAME_LIB_LIST) {
-        QMAKE_POST_LINK += && install_name_tool -change $$INSTALL_NAME_LIB "@executable_path/../libs/$${INSTALL_NAME_LIB}" $$INSTALL_NAME_TARGET
-    }
-
-	# OSG UTIL LIBRARY
-    INSTALL_NAME_TARGET = $$DESTDIR/$${TARGET}.app/Contents/libs/libosgUtil.dylib
-    INSTALL_NAME_LIB_LIST = \
-        libOpenThreads.dylib \
-        libosg.dylib
-    for(INSTALL_NAME_LIB, INSTALL_NAME_LIB_LIST) {
-        QMAKE_POST_LINK += && install_name_tool -change $$INSTALL_NAME_LIB "@executable_path/../libs/$${INSTALL_NAME_LIB}" $$INSTALL_NAME_TARGET
-    }
-
-
-	# OSG VIEWER LIBRARY
-    INSTALL_NAME_TARGET = $$DESTDIR/$${TARGET}.app/Contents/libs/libosgViewer.dylib
-    INSTALL_NAME_LIB_LIST = \
-        libOpenThreads.dylib \
-        libosg.dylib \
-        libosgGA.dylib \
-        libosgDB.dylib \
-        libosgUtil.dylib \
-        libosgText.dylib
-    for(INSTALL_NAME_LIB, INSTALL_NAME_LIB_LIST) {
-        QMAKE_POST_LINK += && install_name_tool -change $$INSTALL_NAME_LIB "@executable_path/../libs/$${INSTALL_NAME_LIB}" $$INSTALL_NAME_TARGET
-    }
-
-	# OSG WIDGET LIBRARY
-    INSTALL_NAME_TARGET = $$DESTDIR/$${TARGET}.app/Contents/libs/libosgWidget.dylib
-    INSTALL_NAME_LIB_LIST = \
-        libOpenThreads.dylib \
-        libosg.dylib \
-        libosgGA.dylib \
-        libosgDB.dylib \
-        libosgUtil.dylib \
+        libosgManipulator.dylib \
+        libosgParticle.dylib \
+        libosgPresentation.dylib \
+        libosgShadow.dylib \
+        libosgSim.dylib \
+        libosgTerrain.dylib \
         libosgText.dylib \
-        libosgViewer.dylib
+        libosgUtil.dylib \
+        libosgViewer.dylib \
+        libosgVolume.dylib \
+        libosgWidget.dylib
     for(INSTALL_NAME_LIB, INSTALL_NAME_LIB_LIST) {
-        QMAKE_POST_LINK += && install_name_tool -change $$INSTALL_NAME_LIB "@executable_path/../libs/$${INSTALL_NAME_LIB}" $$INSTALL_NAME_TARGET
+        QMAKE_POST_LINK += && install_name_tool -add_rpath "@executable_path/../libs" $$DESTDIR/$${TARGET}.app/Contents/libs/$$INSTALL_NAME_LIB
     }
 
-	# CORE OSG LIBRARY
-    QMAKE_POST_LINK += && install_name_tool -change libOpenThreads.dylib "@executable_path/../libs/libOpenThreads.dylib" $$DESTDIR/$${TARGET}.app/Contents/libs/libosg.dylib
+    # osg plugins
+    INSTALL_NAME_LIB_LIST = \
+        osgdb_3dc.so \
+        osgdb_3ds.so \
+        osgdb_ac.so \
+        osgdb_bmp.so \
+        osgdb_bsp.so \
+        osgdb_bvh.so \
+        osgdb_cfg.so \
+        osgdb_curl.so \
+        osgdb_dds.so \
+        osgdb_deprecated_osg.so \
+        osgdb_deprecated_osganimation.so \
+        osgdb_deprecated_osgfx.so \
+        osgdb_deprecated_osgparticle.so \
+        osgdb_deprecated_osgshadow.so \
+        osgdb_deprecated_osgsim.so \
+        osgdb_deprecated_osgterrain.so \
+        osgdb_deprecated_osgtext.so \
+        osgdb_deprecated_osgviewer.so \
+        osgdb_deprecated_osgvolume.so \
+        osgdb_deprecated_osgwidget.so \
+        osgdb_dot.so \
+        osgdb_dw.so \
+        osgdb_dxf.so \
+        osgdb_freetype.so \
+        osgdb_glsl.so \
+        osgdb_gz.so \
+        osgdb_hdr.so \
+        osgdb_imageio.so \
+        osgdb_ive.so \
+        osgdb_jp2.so \
+        osgdb_ktx.so \
+        osgdb_logo.so \
+        osgdb_lwo.so \
+        osgdb_lws.so \
+        osgdb_md2.so \
+        osgdb_mdl.so \
+        osgdb_normals.so \
+        osgdb_obj.so \
+        osgdb_openflight.so \
+        osgdb_osc.so \
+        osgdb_osg.so \
+        osgdb_osga.so \
+        osgdb_osgshadow.so \
+        osgdb_osgterrain.so \
+        osgdb_osgtgz.so \
+        osgdb_osgviewer.so \
+        osgdb_p3d.so \
+        osgdb_pdf.so \
+        osgdb_pic.so \
+        osgdb_ply.so \
+        osgdb_pnm.so \
+        osgdb_pov.so \
+        osgdb_pvr.so \
+        osgdb_revisions.so \
+        osgdb_rgb.so \
+        osgdb_rot.so \
+        osgdb_scale.so \
+        osgdb_sdl.so \
+        osgdb_serializers_osg.so \
+        osgdb_serializers_osganimation.so \
+        osgdb_serializers_osgfx.so \
+        osgdb_serializers_osgga.so \
+        osgdb_serializers_osgmanipulator.so \
+        osgdb_serializers_osgparticle.so \
+        osgdb_serializers_osgshadow.so \
+        osgdb_serializers_osgsim.so \
+        osgdb_serializers_osgterrain.so \
+        osgdb_serializers_osgtext.so \
+        osgdb_serializers_osgviewer.so \
+        osgdb_serializers_osgvolume.so \
+        osgdb_shp.so \
+        osgdb_stl.so \
+        osgdb_svg.so \
+        osgdb_tga.so \
+        osgdb_tgz.so \
+        osgdb_tiff.so \
+        osgdb_trans.so \
+        osgdb_trk.so \
+        osgdb_txf.so \
+        osgdb_txp.so \
+        osgdb_vtf.so \
+        osgdb_x.so \
+        osgdb_zeroconf.so \
+        osgdb_zip.so
+    for(INSTALL_NAME_LIB, INSTALL_NAME_LIB_LIST) {
+        QMAKE_POST_LINK += && install_name_tool -add_rpath "@executable_path/../libs" $$DESTDIR/$${TARGET}.app/Contents/libs/osgPlugins-3.2.1/$$INSTALL_NAME_LIB
+    }
 
     # SDL Framework
     QMAKE_POST_LINK += && install_name_tool -change "@rpath/SDL.framework/Versions/A/SDL" "@executable_path/../Frameworks/SDL.framework/Versions/A/SDL" $$DESTDIR/$${TARGET}.app/Contents/MacOS/$${TARGET}
