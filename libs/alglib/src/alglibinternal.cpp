@@ -344,15 +344,6 @@ static void ftbase_ffticltrec(/* Real    */ ae_vector* a,
      ae_int_t m,
      ae_int_t n,
      ae_state *_state);
-static void ftbase_fftirltrec(/* Real    */ ae_vector* a,
-     ae_int_t astart,
-     ae_int_t astride,
-     /* Real    */ ae_vector* b,
-     ae_int_t bstart,
-     ae_int_t bstride,
-     ae_int_t m,
-     ae_int_t n,
-     ae_state *_state);
 static void ftbase_ftbasefindsmoothrec(ae_int_t n,
      ae_int_t seed,
      ae_int_t leastfactor,
@@ -15642,88 +15633,6 @@ static void ftbase_ffticltrec(/* Real    */ ae_vector* a,
     }
 }
 
-
-/*************************************************************************
-Recurrent subroutine for a InternalRealLinTranspose
-
-
-  -- ALGLIB --
-     Copyright 01.05.2009 by Bochkanov Sergey
-*************************************************************************/
-static void ftbase_fftirltrec(/* Real    */ ae_vector* a,
-     ae_int_t astart,
-     ae_int_t astride,
-     /* Real    */ ae_vector* b,
-     ae_int_t bstart,
-     ae_int_t bstride,
-     ae_int_t m,
-     ae_int_t n,
-     ae_state *_state)
-{
-    ae_int_t i;
-    ae_int_t j;
-    ae_int_t idx1;
-    ae_int_t idx2;
-    ae_int_t m1;
-    ae_int_t n1;
-
-
-    if( m==0||n==0 )
-    {
-        return;
-    }
-    if( ae_maxint(m, n, _state)<=8 )
-    {
-        for(i=0; i<=m-1; i++)
-        {
-            idx1 = bstart+i;
-            idx2 = astart+i*astride;
-            for(j=0; j<=n-1; j++)
-            {
-                b->ptr.p_double[idx1] = a->ptr.p_double[idx2];
-                idx1 = idx1+bstride;
-                idx2 = idx2+1;
-            }
-        }
-        return;
-    }
-    if( n>m )
-    {
-        
-        /*
-         * New partition:
-         *
-         * "A^T -> B" becomes "(A1 A2)^T -> ( B1 )
-         *                                  ( B2 )
-         */
-        n1 = n/2;
-        if( n-n1>=8&&n1%8!=0 )
-        {
-            n1 = n1+(8-n1%8);
-        }
-        ae_assert(n-n1>0, "Assertion failed", _state);
-        ftbase_fftirltrec(a, astart, astride, b, bstart, bstride, m, n1, _state);
-        ftbase_fftirltrec(a, astart+n1, astride, b, bstart+n1*bstride, bstride, m, n-n1, _state);
-    }
-    else
-    {
-        
-        /*
-         * New partition:
-         *
-         * "A^T -> B" becomes "( A1 )^T -> ( B1 B2 )
-         *                     ( A2 )
-         */
-        m1 = m/2;
-        if( m-m1>=8&&m1%8!=0 )
-        {
-            m1 = m1+(8-m1%8);
-        }
-        ae_assert(m-m1>0, "Assertion failed", _state);
-        ftbase_fftirltrec(a, astart, astride, b, bstart, bstride, m1, n, _state);
-        ftbase_fftirltrec(a, astart+m1*astride, astride, b, bstart+m1, bstride, m-m1, n, _state);
-    }
-}
 
 
 /*************************************************************************
