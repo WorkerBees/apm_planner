@@ -87,6 +87,7 @@ void AP2DataPlotAxisDialog::cellChanged(int row,int col)
 
 void AP2DataPlotAxisDialog::autoButtonClicked(bool checked)
 {
+    Q_UNUSED(checked)
     if (ui->graphTableWidget->selectedItems().size() == 0)
     {
         return;
@@ -103,6 +104,7 @@ void AP2DataPlotAxisDialog::autoButtonClicked(bool checked)
 }
 void AP2DataPlotAxisDialog::manualButtonClicked(bool checked)
 {
+    Q_UNUSED(checked)
     if (ui->graphTableWidget->selectedItems().size() == 0)
     {
         return;

@@ -52,7 +52,7 @@ class MAVLinkProtocol : public QObject
 public:
     explicit MAVLinkProtocol(QObject *parent = 0);
     void setConnectionManager(LinkManager *manager) { m_connectionManager = manager; }
-    void sendMessage(mavlink_message_t msg) { }
+    void sendMessage(mavlink_message_t msg) { Q_UNUSED(msg) }
     void stopLogging();
     bool startLogging(const QString& filename);
     bool loggingEnabled() { return m_loggingEnabled; }

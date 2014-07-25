@@ -194,6 +194,9 @@ bool FlightModeConfig::isFlightModeChanged()
 
 void FlightModeConfig::modeChanged(int sysId, QString status, QString description)
 {
+    Q_UNUSED(sysId)
+    Q_UNUSED(status)
+    Q_UNUSED(description)
     //Unused?
 }
 

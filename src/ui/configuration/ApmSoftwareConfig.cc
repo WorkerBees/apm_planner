@@ -531,16 +531,23 @@ void ApmSoftwareConfig::populateTimerTick()
 
 void ApmSoftwareConfig::writeParameter(int component, QString parameterName, QVariant value)
 {
+    Q_UNUSED(component)
+    Q_UNUSED(parameterName)
+    Q_UNUSED(value)
     QLOG_DEBUG() << "ASC writeParameter";
 }
 
 void ApmSoftwareConfig::readParameter(int component, QString parameterName, QVariant value)
 {
+    Q_UNUSED(component)
+    Q_UNUSED(parameterName)
+    Q_UNUSED(value)
     QLOG_DEBUG() << "ASC readParameter";
 }
 
 void ApmSoftwareConfig::parameterChanged(int uas, int component, int parameterCount, int parameterId, QString parameterName, QVariant value)
 {
+    Q_UNUSED(component)
     QString countString;
     // Create progress of downloading all parameters for UI
     switch (m_paramDownloadState){

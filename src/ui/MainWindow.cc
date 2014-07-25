@@ -1825,6 +1825,7 @@ void MainWindow::addLink(int linkid)
 
 void MainWindow::addLink(LinkInterface *link)
 {
+    Q_UNUSED(link)
     //This signal is fired when the connection manager adds a new link.
     //Need to create a comms configuration window.
 
@@ -1862,6 +1863,7 @@ void MainWindow::addLink(LinkInterface *link)
 }
 void MainWindow::linkError(int linkid,QString errorstring)
 {
+    Q_UNUSED(linkid)
     QMessageBox::information(this,"Link Error",errorstring);
 }
 

@@ -2,7 +2,7 @@
 #include <QVBoxLayout>
 UASQuickViewGaugeItem::UASQuickViewGaugeItem(QWidget *parent) : UASQuickViewItem(parent)
 {
-    
+
 }
 void UASQuickViewGaugeItem::setValue(double value)
 {
@@ -15,6 +15,7 @@ void UASQuickViewGaugeItem::setTitle(QString title)
 }
 void UASQuickViewGaugeItem::resizeEvent(QResizeEvent *event)
 {
+    Q_UNUSED(event)
     QFont valuefont = valueLabel->font();
     QFont titlefont = titleLabel->font();
     valuefont.setPixelSize(this->height() / 2.0);

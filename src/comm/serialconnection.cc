@@ -38,6 +38,7 @@ This file is part of the APM_PLANNER project
 #include <QTimer>
 SerialConnection::SerialConnection(QObject *parent) : SerialLinkInterface()
 {
+    Q_UNUSED(parent)
     m_linkId = getNextLinkId();
     m_isConnected = false;
     m_port = 0;
@@ -132,22 +133,27 @@ int SerialConnection::getStopBitsType() const
 }
 bool SerialConnection::setBaudRateType(int rateIndex)
 {
+    Q_UNUSED(rateIndex)
     return true;
 }
 bool SerialConnection::setFlowType(int flow)
 {
+    Q_UNUSED(flow)
     return true;
 }
 bool SerialConnection::setParityType(int parity)
 {
+    Q_UNUSED(parity)
     return true;
 }
 bool SerialConnection::setDataBitsType(int dataBits)
 {
+    Q_UNUSED(dataBits)
     return true;
 }
 bool SerialConnection::setStopBitsType(int stopBits)
 {
+    Q_UNUSED(stopBits)
     return true;
 }
 void SerialConnection::loadSettings()

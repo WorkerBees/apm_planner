@@ -303,6 +303,7 @@ void LinkManager::addLink(LinkInterface *link)
 }
 void LinkManager::removeLink(LinkInterface *link)
 {
+    Q_UNUSED(link)
     //This function is not yet supported, it will be once we support multiple MAVs
 }
 
@@ -493,11 +494,12 @@ QList<QString> LinkManager::getCurrentPorts()
 
 void LinkManager::removeSerialConnection(int index)
 {
-
+    Q_UNUSED(index)
 }
 void LinkManager::messageReceived(LinkInterface* link,mavlink_message_t message)
 {
-
+    Q_UNUSED(link)
+    Q_UNUSED(message)
 }
 UASInterface* LinkManager::getUas(int id)
 {

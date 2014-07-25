@@ -257,6 +257,7 @@ void BatteryMonitorConfig::activeUASSet(UASInterface *uas)
 }
 void BatteryMonitorConfig::alertOnLowClicked(bool checked)
 {
+    Q_UNUSED(checked)
 }
 
 void BatteryMonitorConfig::calcDividerSet()

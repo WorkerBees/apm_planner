@@ -60,6 +60,7 @@ This file is part of the QGROUNDCONTROL project
 
 CommConfigurationWindow::CommConfigurationWindow(int linkid, ProtocolInterface* protocol, QWidget *parent) : QDialog(parent)
 {
+    Q_UNUSED(protocol)
     setWindowFlags(Qt::WindowStaysOnTopHint);
     this->m_linkid = linkid;
 
@@ -212,7 +213,7 @@ CommConfigurationWindow::CommConfigurationWindow(int linkid, ProtocolInterface* 
 	XbeeLink* xbee = dynamic_cast<XbeeLink*>(link); // new Konrad
 	if(xbee != 0)
 	{
-		QWidget* conf = new XbeeConfigurationWindow(xbee,this); 
+		QWidget* conf = new XbeeConfigurationWindow(xbee,this);
 		ui.linkScrollArea->setWidget(conf);
 		ui.linkGroupBox->setTitle(tr("Xbee Link"));
         ui.linkType->setCurrentIndex(ui.linkType->findData(QGC_LINK_XBEE));
@@ -277,6 +278,7 @@ void CommConfigurationWindow::linkCurrentIndexChanged(int currentIndex)
 
 void CommConfigurationWindow::setLinkType(qgc_link_t linktype)
 {
+    Q_UNUSED(linktype)
 /*	if(link->isConnected())
 	{
 		// close old configuration window
@@ -307,7 +309,7 @@ void CommConfigurationWindow::setLinkType(qgc_link_t linktype)
 				MainWindow::instance()->addLink(tmpLink);
 				break;
 			}
-			
+
         case QGC_LINK_TCP:
             {
             TCPLink *tcp = new TCPLink();
@@ -342,9 +344,9 @@ void CommConfigurationWindow::setLinkType(qgc_link_t linktype)
 	const int32_t& linkID(LinkManager::instance()->getLinks()[linkIndex]->getId());
 
 	QList<QAction*> actions = MainWindow::instance()->listLinkMenuActions();
-	foreach (QAction* act, actions) 
+	foreach (QAction* act, actions)
 	{
-        if (act->data().toInt() == linkID) 
+        if (act->data().toInt() == linkID)
         {
             act->trigger();
             break;

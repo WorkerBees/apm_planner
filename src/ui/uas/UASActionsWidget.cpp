@@ -876,6 +876,7 @@ void UASActionsWidget::parameterChanged(int uas, int component, int parameterCou
 
 void UASActionsWidget::contextMenuEvent(QContextMenuEvent *event)
 {
+    Q_UNUSED(event)
     QLOG_DEBUG() << "contextMenuEvent";
 
     if(m_uas == NULL)
