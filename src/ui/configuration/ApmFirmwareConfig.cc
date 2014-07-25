@@ -951,8 +951,8 @@ bool ApmFirmwareConfig::versionIsGreaterThan(QString verstr,double version)
 
 bool ApmFirmwareConfig::compareVersionStrings(const QString& newVersion, const QString& currentVersion)
 {
-    int newMajor,newMinor,newBuild = 0;
-    int currentMajor, currentMinor,currentBuild = 0;
+    int newMajor=0,newMinor,newBuild = 0;
+    int currentMajor=0, currentMinor,currentBuild = 0;
 
     QString newBuildSubMoniker, oldBuildSubMoniker; // holds if the build is a rc or dev build
 
