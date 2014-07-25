@@ -33,7 +33,7 @@ This file is part of the QGROUNDCONTROL project
 
 #include "AutoUpdateCheck.h"
 #include "AutoUpdateDialog.h"
-#include <QtGui/QMainWindow>
+#include <QMainWindow>
 #include <QStatusBar>
 #include <QStackedWidget>
 #include <QSettings>

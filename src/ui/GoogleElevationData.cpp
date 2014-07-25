@@ -112,8 +112,10 @@ void GoogleElevationData::requestElevationData(const QList<Waypoint *> &waypoint
     path.chop(1); // removes the last extra '|'
 
     m_url = GoogleElevationBaseUrl;
-    m_url.addQueryItem("path", path);
-    m_url.addQueryItem("samples", QString::number(samples));
+    QUrlQuery query;
+    query.addQueryItem("path", path);
+    query.addQueryItem("samples", QString::number(samples));
+    m_url.setQuery(query);
     QLOG_DEBUG() << "elevation query :" << m_url;
 
     if (m_networkReply != NULL){

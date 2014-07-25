@@ -30,7 +30,7 @@ This file is part of the QGROUNDCONTROL project
 #ifndef QGCMAVLINK_H
 #define QGCMAVLINK_H
 
-#include <mavlink.h>
+#include "mavlink.h"
 
 //#ifdef MAVLINK_CONF
 //#define MY_MACRO(x) <x>

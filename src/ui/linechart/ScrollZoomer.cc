@@ -33,7 +33,7 @@ public:
 #endif
 };
 
-ScrollZoomer::ScrollZoomer(QwtPlotCanvas *canvas):
+ScrollZoomer::ScrollZoomer(QWidget *canvas):
     QwtPlotZoomer(canvas),
     d_cornerWidget(NULL),
     d_hScrollData(NULL),
@@ -213,7 +213,7 @@ bool ScrollZoomer::eventFilter(QObject *o, QEvent *e)
     if (  o == canvas() ) {
         switch(e->type()) {
         case QEvent::Resize: {
-            const int fw = ((QwtPlotCanvas *)canvas())->frameWidth();
+            const int fw = static_cast<QwtPlotCanvas *>(canvas())->frameWidth();
 
             QRect rect;
             rect.setSize(((QResizeEvent *)e)->size());
@@ -371,7 +371,7 @@ void ScrollZoomer::updateScrollBars()
             d_cornerWidget->hide();
     }
 
-    layoutScrollBars(((QwtPlotCanvas *)canvas())->contentsRect());
+    layoutScrollBars(static_cast<QwtPlotCanvas *>(canvas())->contentsRect());
     plot()->updateLayout();
 }
 
@@ -439,9 +439,9 @@ void ScrollZoomer::layoutScrollBars(const QRect &rect)
 void ScrollZoomer::scrollBarMoved(Qt::Orientation o, double min, double)
 {
     if ( o == Qt::Horizontal )
-        move(min, zoomRect().top());
+        moveBy(min, zoomRect().top());
     else
-        move(zoomRect().left(), min);
+        moveBy(zoomRect().left(), min);
 
     emit zoomed(zoomRect());
 }

@@ -63,3 +63,7 @@ unix:!symbian {
 }
 
 HEADERS += $$PUBLIC_HEADERS $$PRIVATE_HEADERS
+
+greaterThan(QT_MAJOR_VERSION, 4) {
+    QT += core-private
+}

@@ -175,7 +175,7 @@ void QGCFlightGearLink::updateControls(uint64_t time, float rollAilerons, float 
     {
         QString state("%1\t%2\t%3\t%4\t%5\n");
         state = state.arg(rollAilerons).arg(pitchElevator).arg(yawRudder).arg(true).arg(throttle);
-        writeBytes(state.toAscii().constData(), state.length());
+        writeBytes(state.toLatin1().constData(), state.length());
     }
     else
     {
@@ -246,7 +246,7 @@ void QGCFlightGearLink::readBytes()
 
     // Parse string
     float roll, pitch, yaw, rollspeed, pitchspeed, yawspeed;
-    double lat, lon, alt;   
+    double lat, lon, alt;
     float ind_airspeed;
     float true_airspeed;
     float vx, vy, vz, xacc, yacc, zacc;
@@ -289,7 +289,7 @@ void QGCFlightGearLink::readBytes()
     float density = abs_pressure / (air_gas_constant * (temperature - absolute_null_celsius));
     diff_pressure = true_airspeed * true_airspeed * density / 2.0f;
     //qDebug() << "diff_pressure: " << diff_pressure << "abs_pressure: " << abs_pressure;
-    
+
     /* Calculate indicated airspeed */
     const float air_density_sea_level_15C  = 1.225f; //kg/m^3
     if (diff_pressure > 0)
@@ -299,9 +299,9 @@ void QGCFlightGearLink::readBytes()
     {
         ind_airspeed =  -sqrtf((2.0f*fabsf(diff_pressure)) / air_density_sea_level_15C);
     }
-    
+
     //qDebug() << "ind_airspeed: " << ind_airspeed << "true_airspeed: " << true_airspeed;
-    
+
     // Send updated state
     //qDebug()  << "sensorHilEnabled: " << sensorHilEnabled;
     if (_sensorHilEnabled)

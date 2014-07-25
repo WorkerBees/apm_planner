@@ -165,20 +165,11 @@ void QGCDataPlot2D::print()
     if ( dialog.exec() ) {
         plot->setStyleSheet("QWidget { background-color: #FFFFFF; color: #000000; background-clip: border; font-size: 10pt;}");
         plot->setCanvasBackground(Qt::white);
-        QwtPlotPrintFilter filter;
-        filter.color(Qt::white, QwtPlotPrintFilter::CanvasBackground);
-        filter.color(Qt::black, QwtPlotPrintFilter::AxisScale);
-        filter.color(Qt::black, QwtPlotPrintFilter::AxisTitle);
-        filter.color(Qt::black, QwtPlotPrintFilter::MajorGrid);
-        filter.color(Qt::black, QwtPlotPrintFilter::MinorGrid);
-        if ( printer.colorMode() == QPrinter::GrayScale ) {
-            int options = QwtPlotPrintFilter::PrintAll;
-            options &= ~QwtPlotPrintFilter::PrintBackground;
-            options |= QwtPlotPrintFilter::PrintFrameWithScales;
-            filter.setOptions(options);
-        }
-        plot->print(printer, filter);
+        QPainter painter;
+        painter.begin(&printer);
+        plot->drawCanvas(&painter);
         plot->setStyleSheet("QWidget { background-color: #050508; color: #DDDDDF; background-clip: border; font-size: 11pt;}");
+        painter.end();
         //plot->setCanvasBackground(QColor(5, 5, 8));
     }
 }
@@ -216,8 +207,11 @@ void QGCDataPlot2D::exportPDF(QString fileName)
     //            options |= QwtPlotPrintFilter::PrintFrameWithScales;
     //            filter.setOptions(options);
     //        }
-    plot->print(printer);//, filter);
+    QPainter painter;
+    painter.begin(&printer);
+    plot->drawCanvas(&painter);
     plot->setStyleSheet("QWidget { background-color: #050508; color: #DDDDDF; background-clip: border; font-size: 11pt;}");
+    painter.end();
     //plot->setCanvasBackground(QColor(5, 5, 8));
 }
 
@@ -230,15 +224,11 @@ void QGCDataPlot2D::exportSVG(QString fileName)
         generator.setFileName(fileName);
         generator.setSize(QSize(800, 600));
 
-        QwtPlotPrintFilter filter;
-        filter.color(Qt::white, QwtPlotPrintFilter::CanvasBackground);
-        filter.color(Qt::black, QwtPlotPrintFilter::AxisScale);
-        filter.color(Qt::black, QwtPlotPrintFilter::AxisTitle);
-        filter.color(Qt::black, QwtPlotPrintFilter::MajorGrid);
-        filter.color(Qt::black, QwtPlotPrintFilter::MinorGrid);
-
-        plot->print(generator, filter);
+        QPainter painter;
+        painter.begin(&generator);
+        plot->drawCanvas(&painter);
         plot->setStyleSheet("QWidget { background-color: #050508; color: #DDDDDF; background-clip: border; font-size: 11pt;}");
+        painter.end();
     }
 }
 
@@ -607,7 +597,7 @@ bool QGCDataPlot2D::calculateRegression(QString xName, QString yName, QString me
                 plot->setStyleText("lines");
                 // x-value of the current rightmost x position in the plot
                 plot->appendData(tr("regression %1-%2").arg(xName, yName), plot->invTransform(QwtPlot::xBottom, plot->width() - plot->width()*0.08f), (a + b*plot->invTransform(QwtPlot::xBottom, plot->width() - plot->width() * 0.08f)));
-                
+
 				result = true;
             } else {
                 function = tr("Linear regression failed. (Limit: %1 data points. Try with less)").arg(size);

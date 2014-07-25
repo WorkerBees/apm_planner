@@ -45,8 +45,8 @@ This file is part of the PIXHAWK project
 #include <qwt_scale_draw.h>
 #include <qwt_scale_widget.h>
 #include <qwt_scale_engine.h>
-#include <qwt_array.h>
 #include <qwt_plot.h>
+#include <qwt_plot_canvas.h>
 #include <ScrollZoomer.h>
 #include "MG.h"
 
@@ -82,7 +82,7 @@ public:
             // because of the different widths of the labels
             // So we better use a fixed extent.
 
-            minExtent = sd->spacing() + sd->majTickLength() + 1;
+            minExtent = sd->spacing() + sd->tickLength(QwtScaleDiv::MajorTick) + 1;
             minExtent += sd->labelSize(scaleWidget->font(), 1000).width();
         }
 
@@ -164,14 +164,14 @@ protected:
 
 private:
     quint64 count;
-    QwtArray<double> ms;
-    QwtArray<double> value;
+    QVector<double> ms;
+    QVector<double> value;
     double mean;
     double median;
     double variance;
     unsigned int averageWindow;
-    QwtArray<double> outputMs;
-    QwtArray<double> outputValue;
+    QVector<double> outputMs;
+    QVector<double> outputValue;
 };
 
 
@@ -224,6 +224,8 @@ public:
     static const int DEFAULT_PLOT_INTERVAL = 1000 * 8; ///< The default plot interval is 15 seconds
     static const int DEFAULT_SCALE_INTERVAL = 1000 * 8;
 
+    using LinechartPlot::setVisible;
+    using QWidget::setVisible;
 public slots:
     void setRefreshRate(int ms);
     /**

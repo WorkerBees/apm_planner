@@ -34,7 +34,7 @@ This file is part of the QGROUNDCONTROL project
 #ifndef WAYPOINTEDITABLEVIEW_H
 #define WAYPOINTEDITABLEVIEW_H
 
-#include <QtGui/QWidget>
+#include <QWidget>
 #include "Waypoint.h"
 #include <iostream>
 
@@ -88,7 +88,7 @@ public slots:
     void remove();
     /** @brief Waypoint matching this widget has been deleted */
     void deleted(QObject* waypoint);
-    void changedAutoContinue(int);    
+    void changedAutoContinue(int);
     void changedFrame(int state);
     void updateActionView(int action);
 
@@ -124,7 +124,7 @@ private:
 signals:
     void moveUpWaypoint(Waypoint*);
     void moveDownWaypoint(Waypoint*);
-    void removeWaypoint(Waypoint*);    
+    void removeWaypoint(Waypoint*);
     void changeCurrentWaypoint(quint16);
     void setYaw(double);
 

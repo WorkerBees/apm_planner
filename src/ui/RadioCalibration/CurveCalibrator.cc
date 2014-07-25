@@ -43,7 +43,7 @@ CurveCalibrator::CurveCalibrator(QString titleString, QWidget *parent) :
         set[i] = static_cast<double>((*setpoints)[i]);
     }
 
-    curve->setData(pos, set);
+    curve->setSamples(pos, set);
     curve->attach(plot);
 
     plot->replot();
@@ -100,7 +100,7 @@ void CurveCalibrator::setSetpoint(int setpoint)
         set[i] = static_cast<double>((*setpoints)[i]);
     }
 
-    curve->setData(pos, set);
+    curve->setSamples(pos, set);
     plot->replot();
 
     emit setpointChanged(setpoint, setpoints->value(setpoint));
@@ -119,7 +119,7 @@ void CurveCalibrator::set(const QVector<uint16_t> &data)
             pos[i] = static_cast<double>((*positions)[i]);
             set[i] = static_cast<double>((*setpoints)[i]);
         }
-        curve->setData(pos, set);
+        curve->setSamples(pos, set);
         plot->replot();
     } else {
         QLOG_DEBUG() << __FILE__ << __LINE__ << ": wrong data vector size";

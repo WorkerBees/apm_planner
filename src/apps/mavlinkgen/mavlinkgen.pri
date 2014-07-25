@@ -21,24 +21,24 @@
 
 
 INCLUDEPATH += .\
-    ui \
-    generator
+    src/apps/mavlinkgen/ui \
+    src/apps/mavlinkgen/generator
 
-FORMS += ui/XMLCommProtocolWidget.ui
+FORMS += src/apps/mavlinkgen/ui/XMLCommProtocolWidget.ui
 
 HEADERS += \
-    ui/XMLCommProtocolWidget.h \
-    generator/MAVLinkXMLParser.h \
-    generator/MAVLinkXMLParserV10.h \
-    ui/DomItem.h \
-    ui/DomModel.h \
-    ui/QGCMAVLinkTextEdit.h
+    src/apps/mavlinkgen/ui/XMLCommProtocolWidget.h \
+    src/apps/mavlinkgen/generator/MAVLinkXMLParser.h \
+    src/apps/mavlinkgen/generator/MAVLinkXMLParserV10.h \
+    src/apps/mavlinkgen/ui/DomItem.h \
+    src/apps/mavlinkgen/ui/DomModel.h \
+    src/apps/mavlinkgen/ui/QGCMAVLinkTextEdit.h
 SOURCES += \
-    ui/XMLCommProtocolWidget.cc \
-    ui/DomItem.cc \
-    ui/DomModel.cc \
-    generator/MAVLinkXMLParser.cc \
-    generator/MAVLinkXMLParserV10.cc \
-    ui/QGCMAVLinkTextEdit.cc
+    src/apps/mavlinkgen/ui/XMLCommProtocolWidget.cc \
+    src/apps/mavlinkgen/ui/DomItem.cc \
+    src/apps/mavlinkgen/ui/DomModel.cc \
+    src/apps/mavlinkgen/generator/MAVLinkXMLParser.cc \
+    src/apps/mavlinkgen/generator/MAVLinkXMLParserV10.cc \
+    src/apps/mavlinkgen/ui/QGCMAVLinkTextEdit.cc
 
-RESOURCES += mavlinkgen.qrc
+RESOURCES += src/apps/mavlinkgen/mavlinkgen.qrc

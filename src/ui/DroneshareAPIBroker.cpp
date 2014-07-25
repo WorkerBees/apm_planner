@@ -80,7 +80,9 @@ void DroneshareAPIBroker::downloadProgress(qint64 bytesWritten, qint64 totalByte
 void DroneshareAPIBroker::addQueryItem(const QString &key, const QString &value)
 {
     if (!m_url.isEmpty() && (key.length() > 0) && (value.length() > 0)){
-        m_url.addQueryItem(key, value);
+        QUrlQuery query;
+        query.addQueryItem(key, value);
+        m_url.setQuery(query);
     }
 }
 

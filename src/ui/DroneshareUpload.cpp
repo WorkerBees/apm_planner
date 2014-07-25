@@ -93,10 +93,12 @@ void DroneshareUpload::uploadLog(const QString &filename, const QString &user, c
 
     // Setup request url
     m_url.setUrl(DroneShareBaseUrl + "/api/v1/mission/upload/" + vehicleID);
-    m_url.addQueryItem("api_key", apiKey);
-    m_url.addQueryItem("login", user);
-    m_url.addQueryItem("password", password);
-    m_url.addQueryItem("autoCreate", "false");
+    QUrlQuery query;
+    query.addQueryItem("api_key", apiKey);
+    query.addQueryItem("login", user);
+    query.addQueryItem("password", password);
+    query.addQueryItem("autoCreate", "false");
+    m_url.setQuery(query);
 
     // Open file
 

@@ -19,7 +19,7 @@ public:
         OppositeToScale
     };
 
-    ScrollZoomer(QwtPlotCanvas *);
+    ScrollZoomer(QWidget *);
     virtual ~ScrollZoomer();
 
     ScrollBar *horizontalScrollBar() const;

@@ -16,108 +16,110 @@ DEFINES += QTCREATOR_UTILS_LIB
 #    qtcolorbutton.h \
 
 # Input
-HEADERS += utils_global.h \
-    reloadpromptutils.h \
-    settingsutils.h \
-    filesearch.h \
-    listutils.h \
-    pathchooser.h \
-    pathlisteditor.h \
-    filewizardpage.h \
-    filewizarddialog.h \
-    projectintropage.h \
-    basevalidatinglineedit.h \
-    filenamevalidatinglineedit.h \
-    projectnamevalidatinglineedit.h \
-    codegeneration.h \
-    newclasswidget.h \
-    classnamevalidatinglineedit.h \
-    linecolumnlabel.h \
-    fancylineedit.h \
-    savedaction.h \
-    abstractprocess.h \
-    consoleprocess.h \
-    synchronousprocess.h \
-    submitfieldwidget.h \
-    uncommentselection.h \
-    parameteraction.h \
-    treewidgetcolumnstretcher.h \
-    checkablemessagebox.h \
-    qtcassert.h \
-    styledbar.h \
-    stylehelper.h \
-    welcomemodetreewidget.h \
-    iwelcomepage.h \
-    fancymainwindow.h \
-    detailsbutton.h \
-    detailswidget.h \
-    coordinateconversions.h \
-    pathutils.h \
-        worldmagmodel.h \
-        homelocationutil.h \
-           xmlconfig.h
+HEADERS += libs/utils/utils_global.h \
+    libs/utils/reloadpromptutils.h \
+    libs/utils/settingsutils.h \
+    libs/utils/filesearch.h \
+    libs/utils/listutils.h \
+    libs/utils/pathchooser.h \
+    libs/utils/pathlisteditor.h \
+    libs/utils/filewizardpage.h \
+    libs/utils/filewizarddialog.h \
+    libs/utils/projectintropage.h \
+    libs/utils/basevalidatinglineedit.h \
+    libs/utils/filenamevalidatinglineedit.h \
+    libs/utils/projectnamevalidatinglineedit.h \
+    libs/utils/codegeneration.h \
+    libs/utils/newclasswidget.h \
+    libs/utils/classnamevalidatinglineedit.h \
+    libs/utils/linecolumnlabel.h \
+    libs/utils/fancylineedit.h \
+    libs/utils/savedaction.h \
+    libs/utils/abstractprocess.h \
+    libs/utils/consoleprocess.h \
+    libs/utils/synchronousprocess.h \
+    libs/utils/submitfieldwidget.h \
+    libs/utils/uncommentselection.h \
+    libs/utils/parameteraction.h \
+    libs/utils/treewidgetcolumnstretcher.h \
+    libs/utils/checkablemessagebox.h \
+    libs/utils/qtcassert.h \
+    libs/utils/styledbar.h \
+    libs/utils/stylehelper.h \
+    libs/utils/welcomemodetreewidget.h \
+    libs/utils/iwelcomepage.h \
+    libs/utils/fancymainwindow.h \
+    libs/utils/detailsbutton.h \
+    libs/utils/detailswidget.h \
+    libs/utils/coordinateconversions.h \
+    libs/utils/pathutils.h \
+    libs/utils/worldmagmodel.h \
+    libs/utils/homelocationutil.h \
+    libs/utils/xmlconfig.h
 
 win32 {
-HEADERS += winutils.h
+HEADERS += libs/utils/winutils.h
 }
 
-FORMS += checkablemessagebox.ui \
-         filewizardpage.ui \
-         newclasswidget.ui \
-         projectintropage.ui \
-         submiteditorwidget.ui
+FORMS += libs/utils/checkablemessagebox.ui \
+         libs/utils/filewizardpage.ui \
+         libs/utils/newclasswidget.ui \
+         libs/utils/projectintropage.ui \
+         libs/utils/submiteditorwidget.ui
 
 win32 {
-SOURCES += abstractprocess_win.cpp \
-           consoleprocess_win.cpp \
-           winutils.cpp
+SOURCES += libs/utils/abstractprocess_win.cpp \
+           libs/utils/consoleprocess_win.cpp \
+           libs/utils/winutils.cpp
 }
 
 macx {
-SOURCES += consoleprocess_unix.cpp
+SOURCES += libs/utils/consoleprocess_unix.cpp
 }
 
 linux-g++|linux-g++-64 {
-SOURCES += consoleprocess_unix.cpp
+SOURCES += libs/utils/consoleprocess_unix.cpp
 }
 
 #    submiteditorwidget.cpp \
 #    qtcolorbutton.cpp \
 
-SOURCES += reloadpromptutils.cpp \
-    settingsutils.cpp \
-    filesearch.cpp \
-    pathchooser.cpp \
-    pathlisteditor.cpp \
-    filewizardpage.cpp \
-    filewizarddialog.cpp \
-    projectintropage.cpp \
-    basevalidatinglineedit.cpp \
-    filenamevalidatinglineedit.cpp \
-    projectnamevalidatinglineedit.cpp \
-    codegeneration.cpp \
-    newclasswidget.cpp \
-    classnamevalidatinglineedit.cpp \
-    linecolumnlabel.cpp \
-    fancylineedit.cpp \
-    savedaction.cpp \
-    synchronousprocess.cpp \
-    submitfieldwidget.cpp \
-    consoleprocess.cpp \
-    uncommentselection.cpp \
-    parameteraction.cpp \
-    treewidgetcolumnstretcher.cpp \
-    checkablemessagebox.cpp \
-    styledbar.cpp \
-    stylehelper.cpp \
-    welcomemodetreewidget.cpp \
-    iwelcomepage.cpp \
-    fancymainwindow.cpp \
-    detailsbutton.cpp \
-    detailswidget.cpp \
-    coordinateconversions.cpp \
-    pathutils.cpp \
-        worldmagmodel.cpp \
-        homelocationutil.cpp \
-           xmlconfig.cpp
-RESOURCES += utils.qrc
+SOURCES += libs/utils/reloadpromptutils.cpp \
+    libs/utils/settingsutils.cpp \
+    libs/utils/filesearch.cpp \
+    libs/utils/pathchooser.cpp \
+    libs/utils/pathlisteditor.cpp \
+    libs/utils/filewizardpage.cpp \
+    libs/utils/filewizarddialog.cpp \
+    libs/utils/projectintropage.cpp \
+    libs/utils/basevalidatinglineedit.cpp \
+    libs/utils/filenamevalidatinglineedit.cpp \
+    libs/utils/projectnamevalidatinglineedit.cpp \
+    libs/utils/codegeneration.cpp \
+    libs/utils/newclasswidget.cpp \
+    libs/utils/classnamevalidatinglineedit.cpp \
+    libs/utils/linecolumnlabel.cpp \
+    libs/utils/fancylineedit.cpp \
+    libs/utils/savedaction.cpp \
+    libs/utils/synchronousprocess.cpp \
+    libs/utils/submitfieldwidget.cpp \
+    libs/utils/consoleprocess.cpp \
+    libs/utils/uncommentselection.cpp \
+    libs/utils/parameteraction.cpp \
+    libs/utils/treewidgetcolumnstretcher.cpp \
+    libs/utils/checkablemessagebox.cpp \
+    libs/utils/styledbar.cpp \
+    libs/utils/stylehelper.cpp \
+    libs/utils/welcomemodetreewidget.cpp \
+    libs/utils/iwelcomepage.cpp \
+    libs/utils/fancymainwindow.cpp \
+    libs/utils/detailsbutton.cpp \
+    libs/utils/detailswidget.cpp \
+    libs/utils/coordinateconversions.cpp \
+    libs/utils/pathutils.cpp \
+    libs/utils/worldmagmodel.cpp \
+    libs/utils/homelocationutil.cpp \
+    libs/utils/xmlconfig.cpp
+RESOURCES += libs/utils/utils.qrc
+
+QT += concurrent

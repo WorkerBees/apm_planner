@@ -32,7 +32,6 @@ This file is part of the QGROUNDCONTROL project
 #define INCREMENTALPLOT_H
 
 #include <QTimer>
-#include <qwt_array.h>
 #include <qwt_plot.h>
 #include <qwt_legend.h>
 #include <qwt_plot_grid.h>
@@ -60,10 +59,8 @@ public:
 
 private:
     int d_count;
-    QwtArray<double> d_x;
-    QwtArray<double> d_y;
-    QTimer *d_timer;
-    int d_timerCount;
+    QVector<double> d_x;
+    QVector<double> d_y;
 };
 
 /**
