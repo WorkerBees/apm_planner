@@ -416,7 +416,7 @@ void SerialLink::run()
         }
         MG::SLEEP::msleep(SerialLink::poll_interval);
     } // end of forever
-    
+
     {
         QMutexLocker locker(&this->m_stoppMutex);
         if (m_port) { // [TODO][BB] Not sure we need to close the port here
@@ -622,7 +622,10 @@ bool SerialLink::disconnectPureThreaded()
 {
     if (isRunning())
     {
-        if (m_port) QLOG_INFO() << "running so disconnect" << m_port->portName();
+        if (m_port)
+        {
+            QLOG_INFO() << "running so disconnect" << m_port->portName();
+        }
         {
             QMutexLocker locker(&m_stoppMutex);
             m_stopp = true;

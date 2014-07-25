@@ -151,7 +151,7 @@ HUD::HUD(int width, int height, QWidget* parent)
     fontDatabase = QFontDatabase();
     const QString fontFileName = ":/general/vera.ttf"; ///< Font file is part of the QRC file and compiled into the app
     const QString fontFamilyName = "Bitstream Vera Sans";
-    if(!QFile::exists(fontFileName)) QLOG_DEBUG() << "ERROR! font file: " << fontFileName << " DOES NOT EXIST!";
+    if(!QFile::exists(fontFileName)) { QLOG_DEBUG() << "ERROR! font file: " << fontFileName << " DOES NOT EXIST!"; }
 
     fontDatabase.addApplicationFont(fontFileName);
     font = fontDatabase.font(fontFamilyName, "Roman", qMax(5,(int)(10.0f*scalingFactor*1.2f+0.5f)));
@@ -159,7 +159,7 @@ HUD::HUD(int width, int height, QWidget* parent)
     if (!fontPtr) {
         QLOG_DEBUG() << "ERROR! FONT NOT LOADED!";
     } else {
-        if (font.family() != fontFamilyName) QLOG_DEBUG() << "ERROR! WRONG FONT LOADED: " << fontFamilyName;
+        if (font.family() != fontFamilyName) { QLOG_DEBUG() << "ERROR! WRONG FONT LOADED: " << fontFamilyName; }
     }
 
     // Connect with UAS
