@@ -122,6 +122,17 @@ GAudioOutput::GAudioOutput(QObject* parent) : QObject(parent),
 
 #endif
 
+#ifdef Q_OS_MAC
+    speech_channel = new SpeechChannel;
+    OSErr theErr = NewSpeechChannel(NULL, speech_channel);
+    if (theErr != noErr)
+    {
+        QLOG_WARN() << "Creating speech channel failed!";
+        delete speech_channel;
+        speech_channel = NULL;
+    }
+#endif
+
 #if _MSC_VER2
 
     ISpVoice * pVoice = NULL;
@@ -163,6 +174,14 @@ GAudioOutput::~GAudioOutput()
 #ifdef Q_OS_LINUX
     // wait until thread is running before terminate AlsaAudio thread
     AlsaAudio::instance(this)->wait();
+#endif
+#ifdef Q_OS_MAC
+    if(speech_channel)
+    {
+        DisposeSpeechChannel(*speech_channel);
+    };
+    delete speech_channel;
+    speech_channel = NULL;
 #endif
 //#ifdef _MSC_VER2
 // ::CoUninitialize();
@@ -240,13 +259,10 @@ bool GAudioOutput::say(QString text, int severity)
 #endif
 
 #ifdef Q_OS_MAC
-            // Slashes necessary to have the right start to the sentence
-            // copying data prevents SpeakString from reading additional chars
-            text = "\\" + text;
-            QStdWString str = text.toStdWString();
-            unsigned char str2[1024] = {};
-            memcpy(str2, text.toLatin1().data(), str.length());
-            SpeakString(str2);
+            if(speech_channel)
+            {
+                SpeakCFString(*speech_channel, text.toCFString(), NULL);
+            }
             res = true;
 #endif
         }

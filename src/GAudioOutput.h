@@ -44,11 +44,10 @@ This file is part of the PIXHAWK project
 #include <Phonon/AudioOutput>
 #endif
 
-/* For Snow leopard and later
 #ifdef Q_OS_MAC
-#include <NSSpeechSynthesizer.h>
+struct SpeechChannelRecord;
+typedef SpeechChannelRecord *           SpeechChannel;
 #endif
-   */
 
 #ifdef Q_OS_LINUX2
 extern "C" {
@@ -106,7 +105,7 @@ signals:
 
 protected:
 #ifdef Q_OS_MAC
-    //NSSpeechSynthesizer
+    SpeechChannel *speech_channel;
 #endif
 #ifdef Q_OS_LINUX
     //cst_voice* voice; ///< The flite voice object
