@@ -433,6 +433,7 @@ void SerialConfigurationWindow::setLinkName(QString name)
 
 void SerialConfigurationWindow::setBaudRateString(QString baud)
 {
+    Q_UNUSED(baud)
     QString port = ui.portName->currentText();
 #ifdef Q_OS_WIN
     port = port.split("-").first();

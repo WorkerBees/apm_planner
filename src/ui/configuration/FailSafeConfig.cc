@@ -111,7 +111,7 @@ FailSafeConfig::FailSafeConfig(QWidget *parent) : AP2ConfigWidget(parent)
     ui.batteryFailSafeComboBox->addItem("DISABLED");
     ui.batteryFailSafeComboBox->addItem("LAND");
     ui.batteryFailSafeComboBox->addItem("RTL");
-    
+
     connect(ui.fsLongCheckBox,SIGNAL(clicked(bool)),this,SLOT(fsLongClicked(bool)));
     connect(ui.fsShortCheckBox,SIGNAL(clicked(bool)),this,SLOT(fsShortClicked(bool)));
     connect(ui.gcsCheckBox,SIGNAL(clicked(bool)),this,SLOT(gcsChecked(bool)));
@@ -122,7 +122,7 @@ FailSafeConfig::FailSafeConfig(QWidget *parent) : AP2ConfigWidget(parent)
     connect(ui.throttleFailSafeComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(throttleFailSafeChanged(int)));
     connect(ui.batteryCapSpinBox,SIGNAL(editingFinished()),this,SLOT(batteryCapChanged()));
     connect(ui.batteryFailSafeComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(batteryFailSafeChanged(int)));
-    
+
     ui.armedLabel->setText("<h1>DISARMED</h1>");
 
 
@@ -348,6 +348,8 @@ void FailSafeConfig::activeUASSet(UASInterface *uas)
 }
 void FailSafeConfig::parameterChanged(int uas, int component, QString parameterName, QVariant value)
 {
+    Q_UNUSED(uas)
+    Q_UNUSED(component)
     //Arducopter
     if (parameterName == "FS_THR_ENABLE")
     {
@@ -493,6 +495,7 @@ void FailSafeConfig::remoteControlChannelRawChanges(int chan,float value)
 }
 void FailSafeConfig::hilActuatorsChanged(uint64_t time, float act1, float act2, float act3, float act4, float act5, float act6, float act7, float act8)
 {
+    Q_UNUSED(time)
     ui.radio1Out->setValue(act1);
     ui.radio2Out->setValue(act2);
     ui.radio3Out->setValue(act3);
@@ -504,6 +507,7 @@ void FailSafeConfig::hilActuatorsChanged(uint64_t time, float act1, float act2, 
 }
 void FailSafeConfig::gpsStatusChanged(UASInterface* uas,int fixtype)
 {
+    Q_UNUSED(uas)
     if (fixtype == 0 || fixtype == 1)
     {
         ui.gpsLabel->setText("<h1>GPS: No Fix</h1>");
@@ -519,5 +523,7 @@ void FailSafeConfig::gpsStatusChanged(UASInterface* uas,int fixtype)
 }
 void FailSafeConfig::navModeChanged(int uasid, int mode, const QString& text)
 {
+    Q_UNUSED(uasid)
+    Q_UNUSED(mode)
     ui.modeLabel->setText("<h1>" + text + "</h1>");
 }

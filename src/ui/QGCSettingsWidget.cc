@@ -36,6 +36,7 @@ QGCSettingsWidget::QGCSettingsWidget(QWidget *parent, Qt::WindowFlags flags) :
 
 void QGCSettingsWidget::showEvent(QShowEvent *evt)
 {
+    Q_UNUSED(evt)
     if (!m_init)
     {
         m_init = true;

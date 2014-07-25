@@ -167,6 +167,7 @@ UAS::UAS(MAVLinkProtocol* protocol, int id) : UASInterface(),
     lastSendTimeGPS(0),
     lastSendTimeSensors(0)
 {
+    Q_UNUSED(protocol)
     for (unsigned int i = 0; i<255;++i)
     {
         componentID[i] = -1;
@@ -1922,6 +1923,7 @@ void UAS::sendMessage(mavlink_message_t message)
 */
 void UAS::forwardMessage(mavlink_message_t message)
 {
+    Q_UNUSED(message)
     // Emit message on all links that are currently connected
     /*QList<LinkInterface*>link_list = LinkManager::instance()->getLinksForProtocol(mavlink);
 

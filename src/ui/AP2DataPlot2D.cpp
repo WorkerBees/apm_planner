@@ -155,6 +155,7 @@ void AP2DataPlot2D::horizontalScrollMoved(int value)
 }
 void AP2DataPlot2D::showEvent(QShowEvent *evt)
 {
+    Q_UNUSED(evt)
     if (m_updateTimer)
     {
         m_updateTimer->stop();
@@ -168,6 +169,7 @@ void AP2DataPlot2D::showEvent(QShowEvent *evt)
 
 void AP2DataPlot2D::hideEvent(QHideEvent *evt)
 {
+    Q_UNUSED(evt)
     if (m_updateTimer)
     {
         m_updateTimer->stop();
@@ -260,6 +262,9 @@ void AP2DataPlot2D::plotMouseMove(QMouseEvent *evt)
 
 void AP2DataPlot2D::axisDoubleClick(QCPAxis* axis,QCPAxis::SelectablePart part,QMouseEvent* evt)
 {
+    Q_UNUSED(axis)
+    Q_UNUSED(part)
+    Q_UNUSED(evt)
     graphControlsButtonClicked();
 }
 void AP2DataPlot2D::graphControlsButtonClicked()
@@ -497,6 +502,7 @@ void AP2DataPlot2D::disconnected()
 
 void AP2DataPlot2D::addSource(MAVLinkDecoder *decoder)
 {
+    Q_UNUSED(decoder)
     //connect(decoder,SIGNAL(valueChanged(int,QString,QString,QVariant,quint64)),this,SLOT(valueChanged(int,QString,QString,QVariant,quint64)));
 }
 void AP2DataPlot2D::navModeChanged(int uasid, int mode, const QString& text)
@@ -987,6 +993,7 @@ void AP2DataPlot2D::itemEnabled(QString name)
 }
 void AP2DataPlot2D::graphAddedToGroup(QString name,QString group,double scale)
 {
+    Q_UNUSED(scale)
     m_graphClassMap[name].isManualRange = false;
     if (!m_graphGrouping.contains(group))
     {

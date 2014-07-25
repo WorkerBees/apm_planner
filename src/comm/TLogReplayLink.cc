@@ -15,6 +15,7 @@ TLogReplayLink::TLogReplayLink(QObject *parent) :
     m_mavlinkDecoder(new MAVLinkDecoder()),
     m_mavlinkInspector(NULL)
 {
+    Q_UNUSED(parent)
 }
 int TLogReplayLink::getId() const
 {
@@ -52,7 +53,8 @@ qint64 TLogReplayLink::bytesAvailable()
 }
 void TLogReplayLink::writeBytes(const char *bytes, qint64 length)
 {
-
+    Q_UNUSED(bytes)
+    Q_UNUSED(length)
 }
 void TLogReplayLink::readBytes()
 {
