@@ -126,6 +126,11 @@ include (QsLog/QsLog.pri)
 # OS Specific settings
 #
 
+MacBuild | LinuxBuild {
+    QMAKE_CXXFLAGS_DEBUG += -Werror -Wno-error=\\$${LITERAL_HASH}warnings
+    QMAKE_CXXFLAGS_RELEASE += -Werror -Wno-error=\\$${LITERAL_HASH}warnings
+}
+
 MacBuild {
     QMAKE_MAC_SDK = macosx10.9
     QMAKE_INFO_PLIST = Custom-Info.plist
