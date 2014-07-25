@@ -323,17 +323,17 @@ void QGCParamWidget::saveParamsToFile(const QString &filename,ParamFileType type
                 {
                     QString paramValue("%1");
                     QString paramType("%1");
-                    switch (j.value().type())
+                    switch ((QMetaType::Type)j.value().type())
                     {
-                    case QVariant::Int:
+                    case QMetaType::Int:
                         paramValue = paramValue.arg(j.value().toInt());
                         paramType = paramType.arg(MAV_PARAM_TYPE_INT32);
                         break;
-                    case QVariant::UInt:
+                    case QMetaType::UInt:
                         paramValue = paramValue.arg(j.value().toUInt());
                         paramType = paramType.arg(MAV_PARAM_TYPE_UINT32);
                         break;
-                    case QVariant::Double:
+                    case QMetaType::Double:
                     case QMetaType::Float:
                         paramValue = paramValue.arg(j.value().toDouble(), 25, 'g', 12);
                         paramType = paramType.arg(MAV_PARAM_TYPE_REAL32);
@@ -752,7 +752,7 @@ void QGCParamWidget::addParameter(int uas, int component, QString parameterName,
             {
                 //QLOG_DEBUG() << "UPDATED CHILD";
                 parameterItem = child;
-                if (value.type() == QVariant::Char)
+                if ((QMetaType::Type)value.type() == QMetaType::Char)
                 {
                     parameterItem->setData(1, Qt::DisplayRole, value.toUInt());
                 }
@@ -772,7 +772,7 @@ void QGCParamWidget::addParameter(int uas, int component, QString parameterName,
             // CREATE PARAMETER ITEM
             parameterItem = new QTreeWidgetItem(plist);
             // CONFIGURE PARAMETER ITEM
-            if (value.type() == QVariant::Char)
+            if ((QMetaType::Type)value.type() == QMetaType::Char)
             {
                 parameterItem->setData(1, Qt::DisplayRole, value.toUInt());
             }
@@ -903,21 +903,21 @@ void QGCParamWidget::parameterItemChanged(QTreeWidgetItem* current, int column)
                 current->setBackground(1, QBrush(QColor(QGC::colorOrange)));
             }
 
-            switch (parameters.value(key)->value(str).type())
+            switch ((QMetaType::Type)parameters.value(key)->value(str).type())
             {
-            case QVariant::Int:
+            case QMetaType::Int:
             {
                 QVariant fixedValue(value.toInt());
                 parameters.value(key)->insert(str, fixedValue);
             }
                 break;
-            case QVariant::UInt:
+            case QMetaType::UInt:
             {
                 QVariant fixedValue(value.toUInt());
                 parameters.value(key)->insert(str, fixedValue);
             }
                 break;
-            case QVariant::Double:
+            case QMetaType::Double:
             case QMetaType::Float:
             {
                 QVariant fixedValue(value.toFloat());
@@ -1037,21 +1037,21 @@ void QGCParamWidget::retransmissionGuardTick()
                 if (count < retransmissionBurstRequestSize) {
                     // Re-request write operation
                     QVariant value = missingParams->value(key);
-                    switch (parameters.value(component)->value(key).type())
+                    switch ((QMetaType::Type)parameters.value(component)->value(key).type())
                     {
-                    case QVariant::Int:
+                    case QMetaType::Int:
                     {
                         QVariant fixedValue(value.toInt());
                         emit parameterChanged(component, key, fixedValue);
                     }
                         break;
-                    case QVariant::UInt:
+                    case QMetaType::UInt:
                     {
                         QVariant fixedValue(value.toUInt());
                         emit parameterChanged(component, key, fixedValue);
                     }
                         break;
-                    case QVariant::Double:
+                    case QMetaType::Double:
                     case QMetaType::Float:
                     {
                         QVariant fixedValue(value.toFloat());
@@ -1108,30 +1108,30 @@ void QGCParamWidget::setParameter(int component, QString parameterName, QVariant
         return;
     }
 
-    switch (parameters.value(component)->value(parameterName).type())
+    switch ((QMetaType::Type)parameters.value(component)->value(parameterName).type())
     {
-    case QVariant::Char:
+    case QMetaType::Char:
     {
         QVariant fixedValue(QChar((unsigned char)value.toInt()));
         emit parameterChanged(component, parameterName, fixedValue);
         //QLOG_DEBUG() << "PARAM WIDGET SENT:" << fixedValue;
     }
         break;
-    case QVariant::Int:
+    case QMetaType::Int:
     {
         QVariant fixedValue(value.toInt());
         emit parameterChanged(component, parameterName, fixedValue);
         //QLOG_DEBUG() << "PARAM WIDGET SENT:" << fixedValue;
     }
         break;
-    case QVariant::UInt:
+    case QMetaType::UInt:
     {
         QVariant fixedValue(value.toUInt());
         emit parameterChanged(component, parameterName, fixedValue);
         //QLOG_DEBUG() << "PARAM WIDGET SENT:" << fixedValue;
     }
         break;
-    case QVariant::Double:
+    case QMetaType::Double:
     case QMetaType::Float:
     {
         QVariant fixedValue(value.toFloat());

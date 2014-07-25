@@ -332,25 +332,25 @@ void WaypointEditableView::changedFrame(int index)
 }
 
 void WaypointEditableView::changedCurrent(int state)
-{    
+{
     if (state == 0)
     {
         if (wp->getCurrent() == true) //User clicked on the waypoint, that is already current
-        {            
+        {
             m_ui->selectedBox->setChecked(true);
             m_ui->selectedBox->setCheckState(Qt::Checked);
         }
         else
-        {            
+        {
             m_ui->selectedBox->setChecked(false);
-            m_ui->selectedBox->setCheckState(Qt::Unchecked);            
+            m_ui->selectedBox->setCheckState(Qt::Unchecked);
         }
     }
     else
-    {       
+    {
         wp->setCurrent(true);
         emit changeCurrentWaypoint(wp->getId());   //the slot changeCurrentWaypoint() in WaypointList sets all other current flags to false
-    }    
+    }
 }
 
 void WaypointEditableView::updateValues()
@@ -432,7 +432,7 @@ void WaypointEditableView::updateValues()
     MAV_FRAME frame = wp->getFrame();
     int frame_index = m_ui->comboBox_frame->findData(frame);
     if (m_ui->comboBox_frame->currentIndex() != frame_index) {
-        m_ui->comboBox_frame->setCurrentIndex(frame_index);        
+        m_ui->comboBox_frame->setCurrentIndex(frame_index);
     }
 
     // Update action

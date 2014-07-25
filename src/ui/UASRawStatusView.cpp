@@ -77,7 +77,7 @@ void UASRawStatusView::addSource(MAVLinkDecoder *decoder)
 }
 void UASRawStatusView::valueChanged(const int uasId, const QString& name, const QString& unit, const QVariant value, const quint64 msec)
 {
-    if (value.type() == QVariant::Double)
+    if ((QMetaType::Type)value.type() == QMetaType::Double)
     {
         valueChanged(uasId,name,unit,value.toDouble(),msec);
     }

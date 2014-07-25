@@ -106,7 +106,7 @@ void ArduPlanePidConfig::parameterChanged(int uas, int component, QString parame
     {
         QDoubleSpinBox* spinBox = m_nameToBoxMap[parameterName].first;
         double scalar = m_nameToBoxMap[parameterName].second;
-        if (value.type() == QVariant::Double){
+        if ((QMetaType::Type)value.type() == QMetaType::Double){
             spinBox->setValue(value.toDouble()*scalar);
         } else {
             spinBox->setValue(value.toInt()*scalar);
