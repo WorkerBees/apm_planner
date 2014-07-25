@@ -672,7 +672,7 @@ void AP2DataPlot2D::updateValue(const int uasId, const QString& name, const QStr
 
 void AP2DataPlot2D::valueChanged(const int uasId, const QString& name, const QString& unit, const QVariant& value,const quint64 msec)
 {
-    if (value.type() == QVariant::Double || value.type() == QMetaType::Float)
+    if ((QMetaType::Type)value.type() == QMetaType::Double || (QMetaType::Type)value.type() == QMetaType::Float)
     {
         updateValue(uasId,name,unit,value.toDouble(),msec,false);
     }
@@ -860,7 +860,7 @@ void AP2DataPlot2D::itemEnabled(QString name)
         {
             QSqlRecord record = itemquery.record();
             int graphindex = record.value(0).toInt();
-            if (record.value(index+1).type() == QVariant::String)
+            if ((QMetaType::Type)record.value(index+1).type() == QMetaType::QString)
             {
                 QString graphvaluestr = record.value(index+1).toString();
                 strlist.append(QPair<double,QString>(graphindex,graphvaluestr));
@@ -1516,7 +1516,7 @@ void AP2DataPlot2D::exportButtonClicked()
             QString fields = name;
             for (int i=1;i<namerecord.count();i++)
             {
-                if (namerecord.value(i).type() == QVariant::Double)
+                if ((QMetaType::Type)namerecord.value(i).type() == QMetaType::Double)
                 {
                     QString num = QString::number(namerecord.value(i).toDouble(),'f',8);
                     char last = num.at(num.length()-1).toLatin1();
@@ -1531,7 +1531,7 @@ void AP2DataPlot2D::exportButtonClicked()
                     }
                     fields.append(", " + num);
                 }
-                else if (namerecord.value(i).type() == QVariant::String)
+                else if ((QMetaType::Type)namerecord.value(i).type() == QMetaType::QString)
                 {
                     fields.append(", " + namerecord.value(i).toString());
                 }
