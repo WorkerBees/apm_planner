@@ -151,7 +151,7 @@ OSGDependency {
     message("Including support for OpenSceneGraph")
 
 	DEFINES += QGC_OSG_ENABLED
-    
+
     LIBS += \
         -losg \
         -losgViewer \
@@ -183,7 +183,7 @@ OSGDependency {
         src/ui/map3D/WaypointGroupNode.h \
         src/ui/map3D/TerrainParamDialog.h \
         src/ui/map3D/ImageryParamDialog.h
-        
+
     SOURCES += \
         src/ui/map3D/gpl.cc \
         src/ui/map3D/CameraParams.cc \
@@ -220,6 +220,7 @@ MacBuild | WindowsBuild : contains(GOOGLEEARTH, enable) { #fix this to make sens
 
     HEADERS += src/ui/map3D/QGCGoogleEarthView.h
     SOURCES += src/ui/map3D/QGCGoogleEarthView.cc
+    FORMS += src/ui/map3D/QGCGoogleEarthView.ui
     WindowsBuild {
         CONFIG += qaxcontainer
     }
@@ -313,6 +314,8 @@ INCLUDEPATH += \
 # QWT plotting library
 #
 
+QWT_CONFIG = \
+            QwtPlot
 include(libs/qwt/qwt.pri)
 
 #
@@ -374,7 +377,7 @@ WindowsBuild {
 LinuxBuild : exists(/usr/local/lib/libxdrvlib.so) {
     message("Including support for Magellan 3DxWare")
 
-    DEFINES +=
+    DEFINES += \
         MOUSE_ENABLED_LINUX \
         ParameterCheck # Hack: Has to be defined for magellan usage
 
@@ -412,7 +415,7 @@ WindowsBuild : win32 : exists(src/lib/opalrt/OpalApi.h) : exists(C:/OPAL-RT/RT-L
 
     DEFINES += OPAL_RT
 
-    INCLUDEPATH += 
+    INCLUDEPATH +=
         src/lib/opalrt
         libs/lib/opal/include \
 

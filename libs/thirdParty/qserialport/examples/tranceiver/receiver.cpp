@@ -185,19 +185,19 @@ void Receiver::onControlDataReceived()
     std::cout << "." << std::endl;
   }
   else if ( recv.left(10) == "SIG_CTS_RQ" ) {
-    socket_->writeDatagram(QString("SIG_CTS___@%1").arg(sigValToString(serialPort_.cts())).toAscii(),
+    socket_->writeDatagram(QString("SIG_CTS___@%1").arg(sigValToString(serialPort_.cts())).toLatin1(),
                            QHostAddress(udpIp_), udpPortNo_);
   }
   else if ( recv.left(10) == "SIG_DSR_RQ" ) {
-    socket_->writeDatagram(QString("SIG_DSR___@%1").arg(sigValToString(serialPort_.dsr())).toAscii(),
+    socket_->writeDatagram(QString("SIG_DSR___@%1").arg(sigValToString(serialPort_.dsr())).toLatin1(),
                            QHostAddress(udpIp_), udpPortNo_);
   }
   else if ( recv.left(10) == "SIG_DCD_RQ" ) {
-    socket_->writeDatagram(QString("SIG_DCD___@%1").arg(sigValToString(serialPort_.dcd())).toAscii(),
+    socket_->writeDatagram(QString("SIG_DCD___@%1").arg(sigValToString(serialPort_.dcd())).toLatin1(),
                            QHostAddress(udpIp_), udpPortNo_);
   }
   else if ( recv.left(10) == "SIG_RI__RQ" ) {
-    socket_->writeDatagram(QString("SIG_RI____@%1").arg(sigValToString(serialPort_.ri())).toAscii(),
+    socket_->writeDatagram(QString("SIG_RI____@%1").arg(sigValToString(serialPort_.ri())).toLatin1(),
                            QHostAddress(udpIp_), udpPortNo_);
   }
   else if ( recv.left(10) == "SIG_TEST_S" ) {

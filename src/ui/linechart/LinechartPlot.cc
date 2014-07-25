@@ -90,8 +90,8 @@ LinechartPlot::LinechartPlot(QWidget *parent, int plotid, quint64 interval): Qwt
 
     // Set grid
     QwtPlotGrid *grid = new QwtPlotGrid;
-    grid->setMinPen(QPen(Qt::darkGray, 0, Qt::DotLine));
-    grid->setMajPen(QPen(Qt::gray, 0, Qt::DotLine));
+    grid->setMinorPen(QPen(Qt::darkGray, 0, Qt::DotLine));
+    grid->setMajorPen(QPen(Qt::gray, 0, Qt::DotLine));
     grid->enableXMin(true);
     // TODO xmin?
     grid->attach(this);
@@ -322,7 +322,7 @@ void LinechartPlot::appendData(QString dataname, quint64 ms, double value)
 
     // Assign dataset to curve
     QwtPlotCurve* curve = curves.value(dataname);
-    curve->setRawData(dataset->getPlotX(), dataset->getPlotY(), dataset->getPlotCount());
+    curve->setRawSamples(dataset->getPlotX(), dataset->getPlotY(), dataset->getPlotCount());
 
     //    QLOG_DEBUG() << "mintime" << minTime << "maxtime" << maxTime << "last max time" << "window position" << getWindowPosition();
 
@@ -369,7 +369,7 @@ void LinechartPlot::addCurve(QString id)
     curves.insert(id, curve);
 
     curve->setStyle(QwtPlotCurve::Lines);
-    curve->setPaintAttribute(QwtPlotCurve::PaintFiltered);
+    curve->setPaintAttribute(QwtPlotCurve::FilterPoints);
     setCurveColor(id, currentColor);
     //curve->setBrush(currentColor); Leads to a filled curve
     //    curve->setRenderHint(QwtPlotItem::RenderAntialiased);
@@ -657,7 +657,7 @@ QList<QColor> LinechartPlot::getColorMap()
  **/
 void LinechartPlot::setLogarithmicScaling()
 {
-    yScaleEngine = new QwtLog10ScaleEngine();
+    yScaleEngine = new QwtLogScaleEngine(10);
     setAxisScaleEngine(QwtPlot::yLeft, yScaleEngine);
 }
 
@@ -719,24 +719,6 @@ void LinechartPlot::paintRealtime()
 
         windowLock.unlock();
 
-        // Defined both on windows 32- and 64 bit
-#if !(defined Q_OS_WIN)
-
-        //    const bool cacheMode =
-        //            canvas()->testPaintAttribute(QwtPlotCanvas::PaintCached);
-        const bool oldDirectPaint =
-            canvas()->testAttribute(Qt::WA_PaintOutsidePaintEvent);
-
-        const QPaintEngine *pe = canvas()->paintEngine();
-        bool directPaint = pe->hasFeature(QPaintEngine::PaintOutsidePaintEvent);
-        //if ( pe->type() == QPaintEngine::X11 ) {
-            // Even if not recommended by TrollTech, Qt::WA_PaintOutsidePaintEvent
-            // works on X11. This has an tremendous effect on the performance..
-            directPaint = true;
-        //}
-        canvas()->setAttribute(Qt::WA_PaintOutsidePaintEvent, directPaint);
-#endif
-
         // Only set current view as zoombase if zoomer is not active
         // else we could not zoom out any more
 
@@ -745,11 +727,6 @@ void LinechartPlot::paintRealtime()
         } else {
             replot();
         }
-
-#if !(defined Q_OS_WIN)
-        canvas()->setAttribute(Qt::WA_PaintOutsidePaintEvent, oldDirectPaint);
-#endif
-
 
         /*
         QMap<QString, QwtPlotCurve*>::iterator i;

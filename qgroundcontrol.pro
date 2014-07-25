@@ -99,10 +99,11 @@ CONFIG += qt \
 
 QT += network \
     opengl \
+    serialport \
     svg \
     xml \
-    phonon \
     webkit \
+    webkitwidgets \
     sql \
     declarative
 
@@ -126,23 +127,23 @@ include (QsLog/QsLog.pri)
 #
 
 MacBuild {
+    QMAKE_MAC_SDK = macosx10.9
     QMAKE_INFO_PLIST = Custom-Info.plist
     CONFIG += x86_64
     CONFIG -= x86
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
     ICON = $$BASEDIR/files/APMIcons/icon.icns
     QMAKE_INFO_PLIST = APMPlanner.plist   # Sets the pretty name for the build
 
     DEFINES += GIT_COMMIT=$$system(git describe --dirty=-DEV --always)
     DEFINES += GIT_HASH=$$system(git log -n 1 --pretty=format:%H)
 
-    QMAKE_CXXFLAGS_DEBUG += -stdlib=libstdc++ -Werror -Wno-error=\\$${LITERAL_HASH}warnings
-    QMAKE_CXXFLAGS_RELEASE += -stdlib=libstdc++ -Werror -Wno-error=\\$${LITERAL_HASH}warnings
+    QMAKE_CXXFLAGS_DEBUG += -stdlib=libstdc++
+    QMAKE_CXXFLAGS_RELEASE += -stdlib=libstdc++
 
     LIBS += -lz
     LIBS += -lssl -lcrypto
     LIBS += -framework ApplicationServices
-    LIBS += -stdlib=libstdc++ -Werror -Wno-error=\\$${LITERAL_HASH}warnings
+    LIBS += -stdlib=libstdc++
 }
 
 LinuxBuild {
@@ -295,7 +296,7 @@ FORMS += \
     src/ui/Linechart.ui \
     src/ui/UASView.ui \
     src/ui/ParameterInterface.ui \
-    src/ui/WaypointList.ui \    
+    src/ui/WaypointList.ui \
     src/ui/ObjectDetectionView.ui \
     src/ui/JoystickWidget.ui \
     src/ui/HDDisplay.ui \
@@ -328,8 +329,8 @@ FORMS += \
     src/ui/map/QGCMapTool.ui \
     src/ui/map/QGCMapToolBar.ui \
     src/ui/QGCMAVLinkInspector.ui \
-    src/ui/WaypointViewOnlyView.ui \    
-    src/ui/WaypointEditableView.ui \    
+    src/ui/WaypointViewOnlyView.ui \
+    src/ui/WaypointEditableView.ui \
     src/ui/UnconnectedUASInfoWidget.ui \
     src/ui/mavlink/QGCMAVLinkMessageSender.ui \
     src/ui/firmwareupdate/QGCFirmwareUpdateWidget.ui \
@@ -452,7 +453,7 @@ HEADERS += \
     src/comm/TCPLink.h \
     src/ui/ParameterInterface.h \
     src/ui/WaypointList.h \
-    src/Waypoint.h \   
+    src/Waypoint.h \
     src/ui/ObjectDetectionView.h \
     src/input/JoystickInput.h \
     src/ui/JoystickWidget.h \
@@ -518,7 +519,7 @@ HEADERS += \
     src/ui/QGCStatusBar.h \
     src/ui/QGCMAVLinkInspector.h \
     src/ui/WaypointViewOnlyView.h \
-    src/ui/WaypointEditableView.h \    
+    src/ui/WaypointEditableView.h \
     src/ui/UnconnectedUASInfoWidget.h \
     src/ui/QGCRGBDView.h \
     src/ui/mavlink/QGCMAVLinkMessageSender.h \

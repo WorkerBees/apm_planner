@@ -255,7 +255,7 @@ Q3DWidget::handleKeyPressEvent(QKeyEvent* event)
     {
         mOsgGW->getEventQueue()->keyPress(
             static_cast<osgGA::GUIEventAdapter::KeySymbol>(
-                *(event->text().toAscii().data())));
+                *(event->text().toLatin1().data())));
     }
 }
 
@@ -275,7 +275,7 @@ Q3DWidget::handleKeyReleaseEvent(QKeyEvent* event)
     {
         mOsgGW->getEventQueue()->keyRelease(
             static_cast<osgGA::GUIEventAdapter::KeySymbol>(
-                *(event->text().toAscii().data())));
+                *(event->text().toLatin1().data())));
     }
 }
 
@@ -513,7 +513,7 @@ Q3DWidget::createHUD(void)
     hudStateSet->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
     hudStateSet->setMode(GL_BLEND, osg::StateAttribute::ON);
     hudStateSet->setRenderingHint(osg::StateSet::TRANSPARENT_BIN);
-    hudStateSet->setRenderBinDetails(11, "RenderBin");
+    hudStateSet->setRenderBinDetails(11, std::string("RenderBin"));
 
     return mHudProjectionMatrix;
 }
