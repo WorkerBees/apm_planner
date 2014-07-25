@@ -33,8 +33,8 @@ QGCStatusBar::QGCStatusBar(QWidget *parent) :
     toggleLoggingButton(NULL),
     player(NULL),
     changed(true),
-    m_uas(NULL),
-    lastLogDirectory(QGC::MAVLinkLogDirectory())
+    lastLogDirectory(QGC::MAVLinkLogDirectory()),
+    m_uas(NULL)
 {
     setObjectName("QGC_STATUSBAR");
 
